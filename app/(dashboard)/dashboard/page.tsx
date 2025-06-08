@@ -24,7 +24,10 @@ const Action: React.FC = () => {
 const Page: NextPage = () => {
     return (
         <>
-            <h1 className="text-2xl tracking-wider font-bold">Server</h1>
+            <div className="flex items-center justify-between">
+                <h1 className="text-2xl tracking-wider font-bold">Server</h1>
+                <Button variant="default">Add Server</Button>
+            </div>
             <Table className="mt-4">
                 <TableHeader>
                     <TableRow>
