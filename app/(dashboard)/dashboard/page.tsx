@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { MoreVertical, Plus } from "lucide-react";
+import { Delete, MoreVertical, Plus, Trash } from "lucide-react";
 import { NextPage } from "next";
 import React from "react";
 
@@ -14,7 +14,10 @@ const Action: React.FC = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem>
-                    <Button variant="destructive" className="w-full">Delete</Button>
+                    <Button variant="destructive" className="w-full">
+                        <Trash className="text-white" />
+                        Delete
+                    </Button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
