@@ -1,14 +1,27 @@
 import { Button } from "@/components/ui/button";
-import { DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import {
+    DropdownMenuContent,
+    DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu";
 import { Delete, MoreVertical, Plus, Trash } from "lucide-react";
 import { NextPage } from "next";
 import React from "react";
 
 const Action: React.FC = () => {
     return (
-       <DropdownMenu>
+        <DropdownMenu>
             <DropdownMenuTrigger>
                 <MoreVertical />
             </DropdownMenuTrigger>
@@ -22,13 +35,13 @@ const Action: React.FC = () => {
             </DropdownMenuContent>
         </DropdownMenu>
     );
-}
+};
 
 const Page: NextPage = () => {
     return (
         <>
             <div className="flex items-center justify-between">
-                <h1 className="text-2xl tracking-wider font-bold">Server</h1>
+                <h1 className="text-2xl font-bold tracking-wider">Server</h1>
                 <Button variant="outline">
                     <Plus />
                     Add Server
@@ -47,17 +60,21 @@ const Page: NextPage = () => {
                 <TableBody>
                     <TableRow>
                         <TableCell>
-                            <span className="bg-green-500 text-white px-2 py-1 rounded">Online</span>
+                            <span className="rounded bg-green-500 px-2 py-1 text-white">
+                                Online
+                            </span>
                         </TableCell>
                         <TableCell>mini-1</TableCell>
                         <TableCell>Webserver</TableCell>
                         <TableCell>192.168.1.0</TableCell>
-                        <TableCell><Action /></TableCell>
+                        <TableCell>
+                            <Action />
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </Table>
         </>
-    )
-}
+    );
+};
 
 export default Page;

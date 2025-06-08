@@ -1,9 +1,22 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
-import { ChevronUp, Server } from "lucide-react"
-import React from "react"
-import Link from "next/link"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+    DropdownMenu,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { ChevronUp, Server } from "lucide-react";
+import React from "react";
+import Link from "next/link";
 
 const AppSidebarContent: React.FC = () => {
     return (
@@ -23,8 +36,8 @@ const AppSidebarContent: React.FC = () => {
                 </SidebarGroupContent>
             </SidebarGroup>
         </SidebarContent>
-    )
-}
+    );
+};
 
 const AppSidebarFooter: React.FC = () => {
     return (
@@ -34,7 +47,7 @@ const AppSidebarFooter: React.FC = () => {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <SidebarMenuButton>
-                                <div className="flex space-x-2 items-center">
+                                <div className="flex items-center space-x-2">
                                     <Avatar>
                                         <AvatarFallback>Hello</AvatarFallback>
                                     </Avatar>
@@ -47,8 +60,8 @@ const AppSidebarFooter: React.FC = () => {
                 </SidebarMenuItem>
             </SidebarMenu>
         </SidebarFooter>
-    )
-}
+    );
+};
 
 const AppSidebar: React.FC = () => {
     return (
@@ -57,7 +70,7 @@ const AppSidebar: React.FC = () => {
             <AppSidebarContent />
             <AppSidebarFooter />
         </Sidebar>
-    )
-}
+    );
+};
 
 export default AppSidebar;
