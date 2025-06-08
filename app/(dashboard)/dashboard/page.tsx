@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DropdownMenu, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, Plus } from "lucide-react";
 import { NextPage } from "next";
 import React from "react";
 
@@ -26,7 +26,10 @@ const Page: NextPage = () => {
         <>
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl tracking-wider font-bold">Server</h1>
-                <Button variant="default">Add Server</Button>
+                <Button variant="outline">
+                    <Plus />
+                    Add Server
+                </Button>
             </div>
             <Table className="mt-4">
                 <TableHeader>
