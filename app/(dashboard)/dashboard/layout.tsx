@@ -1,4 +1,4 @@
-import AppSidebar from "@/components/pages/layout/sidebar";
+import AppSidebar from "@/components/pages/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 interface LayoutProps {
