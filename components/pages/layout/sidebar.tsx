@@ -1,8 +1,30 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar"
+import { ChevronUp, Server } from "lucide-react"
 import React from "react"
+import Link from "next/link"
+
+const AppSidebarContent: React.FC = () => {
+    return (
+        <SidebarContent>
+            <SidebarGroup>
+                <SidebarGroupContent>
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton asChild>
+                                <Link href="/dashboard">
+                                    <Server />
+                                    <span className="font-bold">Server</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    </SidebarMenu>
+                </SidebarGroupContent>
+            </SidebarGroup>
+        </SidebarContent>
+    )
+}
 
 const AppSidebarFooter: React.FC = () => {
     return (
@@ -32,7 +54,7 @@ const AppSidebar: React.FC = () => {
     return (
         <Sidebar>
             <SidebarHeader />
-            <SidebarContent />
+            <AppSidebarContent />
             <AppSidebarFooter />
         </Sidebar>
     )
