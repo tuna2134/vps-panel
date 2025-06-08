@@ -28,7 +28,9 @@ const AppSidebarContent: React.FC = () => {
                             <SidebarMenuButton asChild>
                                 <Link href="/dashboard" className="ml-1">
                                     <Server />
-                                    <span className="ml-1 font-bold">Server</span>
+                                    <span className="ml-1 font-bold">
+                                        Server
+                                    </span>
                                 </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
