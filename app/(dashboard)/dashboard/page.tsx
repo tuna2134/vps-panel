@@ -15,7 +15,7 @@ import {
     DropdownMenu,
     DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
-import { Delete, MoreVertical, Plus, Trash } from "lucide-react";
+import { MoreVertical, Plus, Trash } from "lucide-react";
 import { NextPage } from "next";
 import React from "react";
 
