@@ -30,8 +30,8 @@ export const AppSidebarFooter: React.FC = () => {
             fetchOptions: {
                 onSuccess: () => {
                     router.push("/sign-in");
-                }
-            }
+                },
+            },
         });
     };
     return (
