@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronUp, LogOut } from "lucide-react";
 import { authClient, useSession } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export const AppSidebarFooter: React.FC = () => {
     const { data: session, isPending, error } = useSession();
@@ -23,8 +24,15 @@ export const AppSidebarFooter: React.FC = () => {
         console.error("Error fetching session:", error);
         return null;
     }
+    const router = useRouter();
     const handleSignOut = async () => {
-        await authClient.signOut();
+        await authClient.signOut({
+            fetchOptions: {
+                onSuccess: () => {
+                    router.push("/sign-in");
+                }
+            }
+        });
     };
     return (
         <SidebarFooter>
