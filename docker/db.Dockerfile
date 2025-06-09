@@ -4,6 +4,7 @@ WORKDIR /src
 COPY package.json pnpm-lock.yaml ./
 RUN corepack enable && pnpm install --frozen-lockfile
 
-COPY drizzle.config.ts lib .
+COPY drizzle.config.ts .
+COPY lib ./lib
 
 CMD ["sleep", "infinity"]
