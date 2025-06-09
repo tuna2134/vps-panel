@@ -1,7 +1,5 @@
 import AppSidebar from "@/components/pages/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 
 interface LayoutProps {
     children: React.ReactNode;

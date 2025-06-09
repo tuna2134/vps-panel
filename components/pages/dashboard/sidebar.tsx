@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -17,6 +17,8 @@ import {
 import { ChevronUp, Server } from "lucide-react";
 import React from "react";
 import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { getUser } from "@/lib/user";
 
 const AppSidebarContent: React.FC = () => {
     return (
@@ -41,7 +43,8 @@ const AppSidebarContent: React.FC = () => {
     );
 };
 
-const AppSidebarFooter: React.FC = () => {
+const AppSidebarFooter: React.FC = async () => {
+    const session = await getUser();
     return (
         <SidebarFooter>
             <SidebarMenu>
@@ -51,9 +54,10 @@ const AppSidebarFooter: React.FC = () => {
                             <SidebarMenuButton>
                                 <div className="flex items-center space-x-2">
                                     <Avatar>
-                                        <AvatarFallback>Hello</AvatarFallback>
+                                        <AvatarImage src={session?.user.image || ""} />
+                                        <AvatarFallback></AvatarFallback>
                                     </Avatar>
-                                    <p>User</p>
+                                    <p>{session?.user.name}</p>
                                 </div>
                                 <ChevronUp className="ml-auto"></ChevronUp>
                             </SidebarMenuButton>
