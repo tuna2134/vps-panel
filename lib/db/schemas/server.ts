@@ -5,4 +5,4 @@ export const server = pgTable("server", {
     name: varchar({ length: 100 }).notNull(),
     ip: text().notNull(),
     type: integer().notNull(),
-})
+});
