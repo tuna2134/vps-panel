@@ -8,11 +8,13 @@ import {
 import {
     DropdownMenu,
     DropdownMenuContent,
+    DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { ChevronUp } from "lucide-react";
-import { useSession } from "@/lib/auth-client";
+import { authClient, useSession } from "@/lib/auth-client";
 
 export const AppSidebarFooter: React.FC = () => {
     const { data: session, isPending, error } = useSession();
@@ -21,6 +23,9 @@ export const AppSidebarFooter: React.FC = () => {
         console.error("Error fetching session:", error);
         return null;
     }
+    const handleSignOut = async () => {
+        await authClient.signOut();
+    };
     return (
         <SidebarFooter>
             <SidebarMenu>
@@ -43,7 +48,10 @@ export const AppSidebarFooter: React.FC = () => {
                         <DropdownMenuContent
                             side="top"
                             className="w-[--radix-popper-anchor-width]"
-                        ></DropdownMenuContent>
+                        >
+                            <DropdownMenuItem></DropdownMenuItem>
+                            <Button onClick={handleSignOut}>Sign out</Button>
+                        </DropdownMenuContent>
                     </DropdownMenu>
                 </SidebarMenuItem>
             </SidebarMenu>
