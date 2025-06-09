@@ -7,3 +7,5 @@ export const signIn = async () => {
         provider: "github",
     });
 };
+
+export const { useSession } = authClient;
