@@ -15,6 +15,7 @@ const Page: NextPage = () => {
     const onClick = async () => {
         await authClient.signIn.social({
             provider: "github",
+            callbackURL: "/dashboard",
         });
     };
     return (
