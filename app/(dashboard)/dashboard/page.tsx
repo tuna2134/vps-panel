@@ -17,6 +17,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { MoreVertical, Plus, Trash } from "lucide-react";
 import { NextPage } from "next";
+import Link from "next/link";
 import React from "react";
 
 const Action: React.FC = () => {
@@ -42,9 +43,11 @@ const Page: NextPage = () => {
         <>
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold tracking-wider">Server</h1>
-                <Button variant="outline">
-                    <Plus />
-                    Add Server
+                <Button variant="outline" asChild>
+                    <Link href="/dashboard/servers/create">
+                        <Plus />
+                        Add Server
+                    </Link>
                 </Button>
             </div>
             <Table className="mt-4">
