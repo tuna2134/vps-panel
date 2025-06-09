@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { GithubIcon } from "lucide-react";
 import { NextPage } from "next";
 
-const Page: NextPage = async () => {
+const Page: NextPage = () => {
     const onClick = async () => {
         await authClient.signIn.social({
             provider: "github",
