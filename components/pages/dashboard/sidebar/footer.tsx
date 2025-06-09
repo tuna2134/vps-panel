@@ -18,8 +18,7 @@ import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 export const AppSidebarFooter: React.FC = () => {
-    const { data: session, isPending, error } = useSession();
-    console.log(session);
+    const { data: session, error } = useSession();
     if (error) {
         console.error("Error fetching session:", error);
         return null;
