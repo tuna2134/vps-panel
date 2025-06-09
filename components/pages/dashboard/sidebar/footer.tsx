@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, LogOut } from "lucide-react";
 import { authClient, useSession } from "@/lib/auth-client";
 
 export const AppSidebarFooter: React.FC = () => {
@@ -55,6 +55,7 @@ export const AppSidebarFooter: React.FC = () => {
                                     className="w-full"
                                     variant="destructive"
                                 >
+                                    <LogOut className="text-white" />
                                     Sign out
                                 </Button>
                             </DropdownMenuItem>
