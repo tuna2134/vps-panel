@@ -30,7 +30,9 @@ export const AppSidebarFooter: React.FC = () => {
                             <SidebarMenuButton>
                                 <div className="flex items-center space-x-2">
                                     <Avatar>
-                                        <AvatarImage src={session?.user.image || ""} />
+                                        <AvatarImage
+                                            src={session?.user.image || ""}
+                                        />
                                         <AvatarFallback></AvatarFallback>
                                     </Avatar>
                                     <p>{session?.user.name}</p>
@@ -38,8 +40,10 @@ export const AppSidebarFooter: React.FC = () => {
                                 <ChevronUp className="ml-auto"></ChevronUp>
                             </SidebarMenuButton>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent side="top" className="w-[--radix-popper-anchor-width]">
-                        </DropdownMenuContent>
+                        <DropdownMenuContent
+                            side="top"
+                            className="w-[--radix-popper-anchor-width]"
+                        ></DropdownMenuContent>
                     </DropdownMenu>
                 </SidebarMenuItem>
             </SidebarMenu>

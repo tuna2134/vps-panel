@@ -7,4 +7,4 @@ export const getUser = cache(async () => {
         headers: await headers(),
     });
     return session;
-})
+});
