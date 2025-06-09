@@ -12,14 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ChevronUp } from "lucide-react";
-import { authClient, useSession } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
 
 export const AppSidebarFooter: React.FC = () => {
     const { data: session, isPending, error } = useSession();
     console.log(session);
     if (error) {
         console.error("Error fetching session:", error);
-        return null; // or handle the error appropriately
+        return null;
     }
     return (
         <SidebarFooter>
@@ -30,10 +30,10 @@ export const AppSidebarFooter: React.FC = () => {
                             <SidebarMenuButton>
                                 <div className="flex items-center space-x-2">
                                     <Avatar>
-                                        <AvatarImage src={session?.image || ""} />
+                                        <AvatarImage src={session?.user.image || ""} />
                                         <AvatarFallback></AvatarFallback>
                                     </Avatar>
-                                    <p>{!isPending && "aaaa"}</p>
+                                    <p>{session?.user.name}</p>
                                 </div>
                                 <ChevronUp className="ml-auto"></ChevronUp>
                             </SidebarMenuButton>
