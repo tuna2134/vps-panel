@@ -18,12 +18,12 @@ import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
 export const AppSidebarFooter: React.FC = () => {
+    const router = useRouter();
     const { data: session, error } = useSession();
     if (error) {
         console.error("Error fetching session:", error);
         return null;
     }
-    const router = useRouter();
     const handleSignOut = async () => {
         await authClient.signOut({
             fetchOptions: {
