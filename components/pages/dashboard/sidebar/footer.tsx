@@ -49,8 +49,15 @@ export const AppSidebarFooter: React.FC = () => {
                             side="top"
                             className="w-[--radix-popper-anchor-width]"
                         >
-                            <DropdownMenuItem></DropdownMenuItem>
-                            <Button onClick={handleSignOut}>Sign out</Button>
+                            <DropdownMenuItem>
+                                <Button
+                                    onClick={handleSignOut}
+                                    className="w-full"
+                                    variant="destructive"
+                                >
+                                    Sign out
+                                </Button>
+                            </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
                 </SidebarMenuItem>
