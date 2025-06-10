@@ -8,7 +8,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-import { GithubIcon } from "lucide-react";
+import { GithubIcon, LoaderCircle } from "lucide-react";
 import { NextPage } from "next";
 
 const Page: NextPage = () => {
@@ -33,6 +33,7 @@ const Page: NextPage = () => {
                     >
                         <GithubIcon />
                         Sign in with GitHub
+                        <LoaderCircle className="animate-spin" />
                     </Button>
                 </CardContent>
             </Card>
