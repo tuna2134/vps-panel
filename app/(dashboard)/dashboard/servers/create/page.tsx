@@ -22,7 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import plans from "./plans.json";
+import { plans, oses } from "./data.json";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
@@ -35,6 +35,11 @@ const formSchema = z.object({
 const Page: NextPage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
+        defaultValues: {
+            name: "",
+            type: "",
+            os: "linux",
+        },
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log("Form values:", values);
@@ -51,7 +56,7 @@ const Page: NextPage = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="w-2/3 mt-6 space-y-8"
+                    className="mt-6 w-2/3 space-y-8"
                 >
                     <FormField
                         control={form.control}
@@ -95,6 +100,40 @@ const Page: NextPage = () => {
                                                 value={plan.id.toString()}
                                             >
                                                 {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory / 1024}G ${plan.resource.disk}`}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                <FormDescription>
+                                    memory, cpu, disk, etc. This is the type of
+                                    server you are adding.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="os"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Server OS</FormLabel>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select OS" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {oses.map((os, index) => (
+                                            <SelectItem
+                                                key={index}
+                                                value={os.id.toString()}
+                                            >
+                                                {os.name}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
