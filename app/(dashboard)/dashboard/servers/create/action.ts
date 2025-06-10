@@ -5,6 +5,7 @@ import { server } from "@/lib/db/schemas";
 
 export async function createServer(name: string, type: string, os: string) {
     let id = crypto.randomUUID();
+    console.log(id);
     const serverData: typeof server.$inferInsert = {
         id,
         name,

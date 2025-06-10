@@ -6,6 +6,7 @@ import {
     FormField,
     FormItem,
     FormLabel,
+    FormMessage,
 } from "@/components/ui/form";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
@@ -36,6 +37,7 @@ const Page: NextPage = () => {
         resolver: zodResolver(formSchema),
     });
     const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+        console.log("Form values:", values);
         await createServer(values.name, values.type, values.os);
         toast.success("Server created successfully!");
     };
@@ -67,6 +69,7 @@ const Page: NextPage = () => {
                                     This is the name of the server that will be
                                     displayed in the dashboard.
                                 </FormDescription>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -91,7 +94,7 @@ const Page: NextPage = () => {
                                                 key={index}
                                                 value={plan.id.toString()}
                                             >
-                                                {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory}G ${plan.resource.disk}`}
+                                                {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory / 1024}G ${plan.resource.disk}`}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
@@ -100,6 +103,7 @@ const Page: NextPage = () => {
                                     memory, cpu, disk, etc. This is the type of
                                     server you are adding.
                                 </FormDescription>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
