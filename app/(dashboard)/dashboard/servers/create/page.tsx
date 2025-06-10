@@ -42,7 +42,6 @@ const Page: NextPage = () => {
         },
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log("Form values:", values);
         await createServer(values.name, values.type, values.os);
         toast.success("Server created successfully!");
     };
@@ -139,8 +138,7 @@ const Page: NextPage = () => {
                                     </SelectContent>
                                 </Select>
                                 <FormDescription>
-                                    memory, cpu, disk, etc. This is the type of
-                                    server you are adding.
+                                    Select the operating system for the server.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
