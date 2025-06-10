@@ -7,12 +7,25 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import { auth } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { server } from "@/lib/db/schemas";
+import { eq } from "drizzle-orm";
 import { Plus } from "lucide-react";
 import { NextPage } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
-const Page: NextPage = () => {
+const Page: NextPage = async () => {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    const servers = await db
+        .select()
+        .from(server)
+        .where(eq(server.authorId, session?.user.id as string));
+    console.log(servers);
     return (
         <>
             <div className="flex items-center justify-between">
@@ -34,9 +47,7 @@ const Page: NextPage = () => {
                         <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
-                    <ServerTableRow />
-                </TableBody>
+                <TableBody></TableBody>
             </Table>
         </>
     );

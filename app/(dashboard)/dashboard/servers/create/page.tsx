@@ -22,7 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { plans, oses } from "./data.json";
+import { plans, oses } from "@/data/config.json";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 

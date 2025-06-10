@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MoreVertical, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { plans } from "@/data/config.json";
 
 const Action: React.FC = () => {
     return (
@@ -26,7 +27,20 @@ const Action: React.FC = () => {
     );
 };
 
-export const ServerTableRow: React.FC = () => {
+interface ServerTableRowProps {
+    status?: string;
+    type: number;
+    name: string;
+    ip: string;
+}
+
+export const ServerTableRow: React.FC<ServerTableRowProps> = ({
+    status,
+    type,
+    name,
+    ip,
+}) => {
+    const plan = plans.find((plan) => plan.id === type);
     return (
         <TableRow>
             <TableCell>
@@ -34,9 +48,9 @@ export const ServerTableRow: React.FC = () => {
                     Online
                 </span>
             </TableCell>
-            <TableCell>mini-1</TableCell>
-            <TableCell>Webserver</TableCell>
-            <TableCell>192.168.1.0</TableCell>
+            <TableCell>{plan?.name}</TableCell>
+            <TableCell>{name}</TableCell>
+            <TableCell>{ip}</TableCell>
             <TableCell>
                 <Action />
             </TableCell>
