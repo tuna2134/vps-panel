@@ -47,7 +47,17 @@ const Page: NextPage = async () => {
                         <TableHead></TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody></TableBody>
+                <TableBody>
+                    {servers.map((server, index) => (
+                        <ServerTableRow
+                            key={index}
+                            status="Online"
+                            type={server.type}
+                            name={server.name}
+                            ip={server.ip}
+                        />
+                    ))}
+                </TableBody>
             </Table>
         </>
     );

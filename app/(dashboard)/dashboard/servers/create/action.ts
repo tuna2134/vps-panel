@@ -8,7 +8,7 @@ import { headers } from "next/headers";
 export async function createServer(name: string, type: string, os: string) {
     const session = await auth.api.getSession({
         headers: await headers(),
-    })
+    });
     const id = crypto.randomUUID();
     const serverData: typeof server.$inferInsert = {
         id,
