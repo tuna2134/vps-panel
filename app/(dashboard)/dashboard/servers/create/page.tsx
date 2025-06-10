@@ -22,6 +22,8 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import plans from "./plans.json";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -101,6 +103,10 @@ const Page: NextPage = () => {
                             </FormItem>
                         )}
                     />
+                    <Button type="submit">
+                        <Plus />
+                        Create
+                    </Button>
                 </form>
             </Form>
         </>
