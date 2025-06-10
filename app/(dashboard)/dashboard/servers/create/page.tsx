@@ -123,7 +123,7 @@ const Page: NextPage = () => {
                                 >
                                     <FormControl>
                                         <SelectTrigger>
-                                            <SelectValue placeholder="Select OS" />
+                                            <SelectValue placeholder="Select server OS" />
                                         </SelectTrigger>
                                     </FormControl>
                                     <SelectContent>
