@@ -54,6 +54,7 @@ const Page: NextPage = async () => {
                             type={server.type}
                             name={server.name}
                             ip={server.ip}
+                            id={server.id}
                         />
                     ))}
                 </TableBody>
