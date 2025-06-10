@@ -8,11 +8,15 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-import { GithubIcon, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
+import { Github } from "iconoir-react";
 import { NextPage } from "next";
+import { useState } from "react";
 
 const Page: NextPage = () => {
+    const [loading, setLoading] = useState<boolean>(false);
     const onClick = async () => {
+        setLoading(true);
         await authClient.signIn.social({
             provider: "github",
             callbackURL: "/dashboard",
@@ -31,9 +35,9 @@ const Page: NextPage = () => {
                         variant="outline"
                         className="mt-4"
                     >
-                        <GithubIcon />
+                        <Github />
                         Sign in with GitHub
-                        <LoaderCircle className="animate-spin" />
+                        {loading && <LoaderCircle className="animate-spin" />}
                     </Button>
                 </CardContent>
             </Card>
