@@ -50,7 +50,7 @@ const Page: NextPage = async () => {
                     {servers.map((server, index) => (
                         <ServerTableRow
                             key={index}
-                            status="Online"
+                            status="online"
                             type={server.type}
                             name={server.name}
                             ip={server.ip}

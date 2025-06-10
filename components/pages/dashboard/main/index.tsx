@@ -28,7 +28,7 @@ const Action: React.FC = () => {
 };
 
 interface ServerTableRowProps {
-    status?: string;
+    status?: "online" | "offline";
     type: number;
     name: string;
     ip: string;
@@ -44,9 +44,15 @@ export const ServerTableRow: React.FC<ServerTableRowProps> = ({
     return (
         <TableRow>
             <TableCell>
-                <span className="rounded bg-green-500 px-2 py-1 text-white">
-                    Online
-                </span>
+                {status === "online" ? (
+                    <span className="rounded bg-green-500 px-2 py-1 text-white">
+                        Online
+                    </span>
+                ) : (
+                    <span className="rounded bg-red-500 px-2 py-1 text-white">
+                        Offline
+                    </span>
+                )}
             </TableCell>
             <TableCell>{plan?.name}</TableCell>
             <TableCell>{name}</TableCell>
