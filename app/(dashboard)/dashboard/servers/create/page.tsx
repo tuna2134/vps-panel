@@ -14,7 +14,12 @@ import { z } from "zod";
 import { Input } from "@/components/ui/input";
 import { createServer } from "./action";
 import { toast } from "sonner";
-import { Select, SelectContent, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+    Select,
+    SelectContent,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -48,7 +53,10 @@ const Page: NextPage = () => {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Server Type</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
                                     <FormControl>
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select server type" />
@@ -57,8 +65,8 @@ const Page: NextPage = () => {
                                     </FormControl>
                                 </Select>
                                 <FormDescription>
-                                    // memory, cpu, disk, etc.
-                                    This is the type of server you are adding.
+                                    // memory, cpu, disk, etc. This is the type
+                                    of server you are adding.
                                 </FormDescription>
                             </FormItem>
                         )}
