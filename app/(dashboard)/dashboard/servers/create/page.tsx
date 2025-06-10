@@ -36,7 +36,7 @@ const Page: NextPage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     });
-    const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         console.log("Form values:", values);
         await createServer(values.name, values.type, values.os);
         toast.success("Server created successfully!");
@@ -50,7 +50,7 @@ const Page: NextPage = () => {
             </div>
             <Form {...form}>
                 <form
-                    onSubmit={form.handleSubmit(handleSubmit)}
+                    onSubmit={form.handleSubmit(onSubmit)}
                     className="mt-6 space-y-8"
                 >
                     <FormField
