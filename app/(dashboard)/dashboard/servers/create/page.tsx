@@ -12,6 +12,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
+import { createServer } from "./action";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -23,7 +25,10 @@ const Page: NextPage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     });
-    const handleSubmit = async (values: z.infer<typeof formSchema>) => {};
+    const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+        await createServer(values.name, values.type, values.os);
+        toast.success("Server created successfully!");
+    };
     return (
         <>
             <div>
