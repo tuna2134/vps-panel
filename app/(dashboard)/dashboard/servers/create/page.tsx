@@ -108,8 +108,7 @@ const Page: NextPage = () => {
                         )}
                     />
                     <Button type="submit">
-                        <Plus />
-                        Create
+                        <Plus /> Create
                     </Button>
                 </form>
             </Form>
