@@ -49,6 +49,25 @@ const Page: NextPage = () => {
                 >
                     <FormField
                         control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Server name</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="Enter server name"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    This is the name of the server that will be
+                                    displayed in the dashboard.
+                                </FormDescription>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="type"
                         render={({ field }) => (
                             <FormItem>
@@ -65,27 +84,8 @@ const Page: NextPage = () => {
                                     </FormControl>
                                 </Select>
                                 <FormDescription>
-                                    // memory, cpu, disk, etc. This is the type
+                                    memory, cpu, disk, etc. This is the type
                                     of server you are adding.
-                                </FormDescription>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Server name</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="Enter server name"
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormDescription>
-                                    This is the name of the server that will be
-                                    displayed in the dashboard.
                                 </FormDescription>
                             </FormItem>
                         )}
