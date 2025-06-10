@@ -25,7 +25,6 @@ const Page: NextPage = async () => {
         .select()
         .from(server)
         .where(eq(server.authorId, session?.user.id as string));
-    console.log(servers);
     return (
         <>
             <div className="flex items-center justify-between">
