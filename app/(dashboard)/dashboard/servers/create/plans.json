@@ -1,0 +1,11 @@
+[
+    {
+        "name": "micro",
+        "resource": {
+            "cpu": 1,
+            "memory": 1024,
+            "disk": 25
+        },
+        "id": 0
+    }
+]

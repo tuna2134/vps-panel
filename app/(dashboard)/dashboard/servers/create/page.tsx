@@ -17,9 +17,11 @@ import { toast } from "sonner";
 import {
     Select,
     SelectContent,
+    SelectItem,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import plans from "./plans.json";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -80,12 +82,21 @@ const Page: NextPage = () => {
                                         <SelectTrigger>
                                             <SelectValue placeholder="Select server type" />
                                         </SelectTrigger>
-                                        <SelectContent></SelectContent>
                                     </FormControl>
+                                    <SelectContent>
+                                        {plans.map((plan, index) => (
+                                            <SelectItem
+                                                key={index}
+                                                value={plan.id.toString()}
+                                            >
+                                                {`${plan.name} ${plan.resource.cpu}C${plan.resource.memory}G ${plan.resource.disk}`}
+                                            </SelectItem>
+                                        ))}
+                                    </SelectContent>
                                 </Select>
                                 <FormDescription>
-                                    memory, cpu, disk, etc. This is the type
-                                    of server you are adding.
+                                    memory, cpu, disk, etc. This is the type of
+                                    server you are adding.
                                 </FormDescription>
                             </FormItem>
                         )}
