@@ -8,6 +8,7 @@ import {
 import { MoreVertical, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { plans } from "@/data/config.json";
+import Link from "next/link";
 
 const Action: React.FC = () => {
     return (
@@ -55,7 +56,11 @@ export const ServerTableRow: React.FC<ServerTableRowProps> = ({
                 )}
             </TableCell>
             <TableCell>{plan?.name}</TableCell>
-            <TableCell>{name}</TableCell>
+            <TableCell>
+                <Button variant="link" asChild>
+                    <Link href={`/dashboard/servers/${name}`}>{name}</Link>
+                </Button>
+            </TableCell>
             <TableCell>{ip}</TableCell>
             <TableCell>
                 <Action />
