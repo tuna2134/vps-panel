@@ -89,7 +89,7 @@ const Page: NextPage = () => {
                                                 key={index}
                                                 value={plan.id.toString()}
                                             >
-                                                {`${plan.name} ${plan.resource.cpu}C${plan.resource.memory}G ${plan.resource.disk}`}
+                                                {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory}G ${plan.resource.disk}`}
                                             </SelectItem>
                                         ))}
                                     </SelectContent>
