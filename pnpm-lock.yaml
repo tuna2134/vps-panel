@@ -88,7 +88,7 @@ importers:
         version: 3.3.1
       zod:
         specifier: ^3.25.56
-        version: 3.25.67
+        version: 3.25.69
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -3054,8 +3054,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@3.25.67:
-    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
+  zod@3.25.69:
+    resolution: {integrity: sha512-cjUx+boz8dfYGssYKLGNTF5VUF6NETpcZCDTN3knhUUXQTAAvErzRhV3pgeCZm2YsL4HOwtEHPonlsshPu2I0A==}
 
 snapshots:
 
@@ -4308,7 +4308,7 @@ snapshots:
       jose: 6.0.11
       kysely: 0.28.2
       nanostores: 0.11.4
-      zod: 3.25.67
+      zod: 3.25.69
 
   better-call@1.0.11:
     dependencies:
@@ -5964,4 +5964,4 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@3.25.67: {}
+  zod@3.25.69: {}
