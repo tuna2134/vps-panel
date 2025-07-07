@@ -9,6 +9,19 @@ services:
             - "5432:5432"
         volumes:
             - db_data:/var/lib/postgresql/data
+    dev:
+        build:
+            context: .
+            dockerfile: docker/dev.Dockerfile
+        ports:
+            - "3000:3000"
+        environment:
+            DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+        depends_on:
+            - db
+        volumes:
+            - .:/src
+            - /src/node_modules
 
 volumes:
     db_data:
