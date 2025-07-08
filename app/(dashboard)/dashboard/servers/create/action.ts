@@ -25,7 +25,7 @@ export async function createServer(name: string, type: string, os: string) {
     const gateway = "192.168.122.1";
     const plan = plans.find((plan) => plan.id === parseInt(type));
     const res = await fetch(
-        `${process.env.NEXT_PUBLIC_VM_CONTROLLER_ENDPOINT}/domains`,
+        `${process.env.VM_CONTROLLER_ENDPOINT}/domains`,
         {
             method: "POST",
             headers: {
