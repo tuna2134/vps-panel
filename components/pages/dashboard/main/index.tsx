@@ -12,14 +12,20 @@ import { plans } from "@/data/config.json";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
-import { deleteServer, restartServer, shutdownServer } from "./action";
-import { Restart, SystemShut } from "iconoir-react";
+import {
+    deleteServer,
+    powerOnServer,
+    restartServer,
+    shutdownServer,
+} from "./action";
+import { OnTag, SystemRestart, SystemShut } from "iconoir-react";
 
 interface ActionProps {
     serverId: string;
+    online: boolean;
 }
 
-const Action: React.FC<ActionProps> = ({ serverId }) => {
+const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     const handleDelete = async () => {
         toast("Deleting server...");
         try {
@@ -50,6 +56,16 @@ const Action: React.FC<ActionProps> = ({ serverId }) => {
             toast.error("Failed to restart server");
         }
     };
+    const handlePowerOn = async () => {
+        toast("Powering on server...");
+        try {
+            await powerOnServer(serverId);
+            toast.success("Server powered on successfully");
+        } catch (error) {
+            console.error("Error powering on server:", error);
+            toast.error("Failed to power on server");
+        }
+    };
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -60,9 +76,21 @@ const Action: React.FC<ActionProps> = ({ serverId }) => {
                     <Button
                         variant="outline"
                         className="w-full"
-                        onClick={handleRestart}
+                        onClick={handlePowerOn}
+                        disabled={online}
                     >
-                        <Restart />
+                        <OnTag />
+                        Power On
+                    </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={handleRestart}
+                        disabled={!online}
+                    >
+                        <SystemRestart />
                         Restart
                     </Button>
                 </DropdownMenuItem>
@@ -71,6 +99,7 @@ const Action: React.FC<ActionProps> = ({ serverId }) => {
                         variant="outline"
                         className="w-full text-red-500"
                         onClick={handleShutdown}
+                        disabled={!online}
                     >
                         <SystemShut className="text-red-500" />
                         Shutdown
@@ -140,7 +169,7 @@ export const ServerTableRow: React.FC<ServerTableRowProps> = ({
             </TableCell>
             <TableCell>{ip}</TableCell>
             <TableCell>
-                <Action serverId={id} />
+                <Action serverId={id} online={status === "online"} />
             </TableCell>
         </TableRow>
     );
