@@ -39,7 +39,7 @@ export async function createServer(name: string, type: string, os: string) {
                 },
                 resources: {
                     cpu: plan?.resource.cpu,
-                    memory: plan?.resource.memory,
+                    memory: (plan?.resource.memory || 1024) / 1024,
                     disk: `${plan?.resource.disk}G`,
                 },
             }),
