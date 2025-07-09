@@ -1,3 +1,4 @@
+"use client";
 import { TableCell, TableRow } from "@/components/ui/table";
 import {
     DropdownMenu,
@@ -10,8 +11,35 @@ import { Button } from "@/components/ui/button";
 import { plans } from "@/data/config.json";
 import Link from "next/link";
 import React from "react";
+import { toast } from "sonner";
+import { deleteServer, shutdownServer } from "./action";
+import { SystemShut } from "iconoir-react";
 
-const Action: React.FC = () => {
+interface ActionProps {
+    serverId: string;
+}
+
+const Action: React.FC<ActionProps> = ({ serverId }) => {
+    const handleDelete = async () => {
+        toast("Deleting server...");
+        try {
+            await deleteServer(serverId);
+            toast.success("Server deleted successfully");
+        } catch (error) {
+            console.error("Error deleting server:", error);
+            toast.error("Failed to delete server");
+        }
+    };
+    const handleShutdown = async () => {
+        toast("Shutting down server...");
+        try {
+            await shutdownServer(serverId);
+            toast.success("Server shutdown successfully");
+        } catch (error) {
+            console.error("Error shutting down server:", error);
+            toast.error("Failed to shutdown server");
+        }
+    };
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -19,7 +47,21 @@ const Action: React.FC = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem>
-                    <Button variant="destructive" className="w-full">
+                    <Button
+                        variant="outline"
+                        className="w-full text-red-500"
+                        onClick={handleShutdown}
+                    >
+                        <SystemShut className="text-red-500" />
+                        Shutdown
+                    </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Button
+                        variant="destructive"
+                        className="w-full"
+                        onClick={handleDelete}
+                    >
                         <Trash className="text-white" />
                         Delete
                     </Button>
@@ -78,7 +120,7 @@ export const ServerTableRow: React.FC<ServerTableRowProps> = ({
             </TableCell>
             <TableCell>{ip}</TableCell>
             <TableCell>
-                <Action />
+                <Action serverId={id} />
             </TableCell>
         </TableRow>
     );

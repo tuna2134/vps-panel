@@ -24,27 +24,24 @@ export async function createServer(name: string, type: string, os: string) {
     const address = "192.168.122.3/24";
     const gateway = "192.168.122.1";
     const plan = plans.find((plan) => plan.id === parseInt(type));
-    const res = await fetch(
-        `${process.env.VM_CONTROLLER_ENDPOINT}/domains`,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                password: generatePassword(16),
-                network: {
-                    address: address,
-                    gateway: gateway,
-                },
-                resources: {
-                    cpu: plan?.resource.cpu,
-                    memory: (plan?.resource.memory || 1024) / 1024,
-                    disk: `${plan?.resource.disk}G`,
-                },
-            }),
+    const res = await fetch(`${process.env.VM_CONTROLLER_ENDPOINT}/domains`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
         },
-    );
+        body: JSON.stringify({
+            password: generatePassword(16),
+            network: {
+                address: address,
+                gateway: gateway,
+            },
+            resources: {
+                cpu: plan?.resource.cpu,
+                memory: (plan?.resource.memory || 1024) / 1024,
+                disk: `${plan?.resource.disk}G`,
+            },
+        }),
+    });
     const data = await res.json();
     if (!res.ok) {
         throw new Error(data.message || "Failed to create server");
