@@ -110,6 +110,7 @@ const Action: React.FC<ActionProps> = ({ serverId, online }) => {
                         variant="destructive"
                         className="w-full"
                         onClick={handleDelete}
+                        disabled={online}
                     >
                         <Trash className="text-white" />
                         Delete
