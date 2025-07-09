@@ -19,10 +19,13 @@ import React from "react";
 
 interface Server {
     id: string;
-    type: string;
+    type: number;
     name: string;
     ip: string;
-    state: string;
+    state: "online" | "offline";
+    createdAt: string;
+    authorId: string;
+    os: string;
 }
 
 const Page: NextPage = async () => {
@@ -44,8 +47,7 @@ const Page: NextPage = async () => {
     );
     // DBとAPIのデータを結合
     const data = await res.json();
-    console.log(data);
-    const serversWithState = servers.map((server) => {
+    const serversWithState: Server[] = servers.map((server) => {
         if (data?.domains !== null && data?.domains.includes(server.name)) {
             return {
                 ...server,
@@ -58,7 +60,6 @@ const Page: NextPage = async () => {
             };
         }
     });
-    console.log(serversWithState);
     return (
         <>
             <div className="flex items-center justify-between">
