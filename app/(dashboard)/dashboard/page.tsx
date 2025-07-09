@@ -48,7 +48,7 @@ const Page: NextPage = async () => {
     // DBとAPIのデータを結合
     const data = await res.json();
     const serversWithState: Server[] = servers.map((server) => {
-        if (data?.domains !== null && data?.domains.includes(server.name)) {
+        if (data?.domains !== null && data?.domains.includes(server.id)) {
             return {
                 ...server,
                 state: "online",
