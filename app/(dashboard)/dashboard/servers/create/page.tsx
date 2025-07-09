@@ -26,6 +26,7 @@ import { plans, oses } from "@/data/config.json";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -34,6 +35,7 @@ const formSchema = z.object({
 });
 
 const Page: NextPage = () => {
+    const [clicked, setClicked] = useState<boolean>(false);
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -45,6 +47,7 @@ const Page: NextPage = () => {
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         toast("Creating server...");
+        setClicked(true);
         await createServer(values.name, values.type, values.os);
         toast.success("Server created successfully!");
         router.push("/dashboard");
@@ -148,7 +151,7 @@ const Page: NextPage = () => {
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">
+                    <Button type="submit" disabled={clicked}>
                         <Plus /> Create
                     </Button>
                 </form>
