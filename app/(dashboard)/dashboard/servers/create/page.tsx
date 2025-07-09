@@ -44,6 +44,7 @@ const Page: NextPage = () => {
         },
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        toast("Creating server...");
         await createServer(values.name, values.type, values.os);
         toast.success("Server created successfully!");
         router.push("/dashboard");
