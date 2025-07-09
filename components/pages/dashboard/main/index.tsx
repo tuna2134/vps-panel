@@ -12,8 +12,8 @@ import { plans } from "@/data/config.json";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
-import { deleteServer, shutdownServer } from "./action";
-import { SystemShut } from "iconoir-react";
+import { deleteServer, restartServer, shutdownServer } from "./action";
+import { Restart, SystemShut } from "iconoir-react";
 
 interface ActionProps {
     serverId: string;
@@ -40,12 +40,32 @@ const Action: React.FC<ActionProps> = ({ serverId }) => {
             toast.error("Failed to shutdown server");
         }
     };
+    const handleRestart = async () => {
+        toast("Restarting server...");
+        try {
+            await restartServer(serverId);
+            toast.success("Server restarted successfully");
+        } catch (error) {
+            console.error("Error restarting server:", error);
+            toast.error("Failed to restart server");
+        }
+    };
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <MoreVertical />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
+                <DropdownMenuItem>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={handleRestart}
+                    >
+                        <Restart />
+                        Restart
+                    </Button>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                     <Button
                         variant="outline"

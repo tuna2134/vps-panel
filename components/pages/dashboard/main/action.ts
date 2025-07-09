@@ -31,6 +31,32 @@ export async function shutdownServer(id: string) {
     }
 }
 
+export async function restartServer(id: string) {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    if (!session) {
+        throw new Error("Unauthorized");
+    }
+    const exists = await db
+        .select()
+        .from(server)
+        .where(and(eq(server.id, id), eq(server.authorId, session.user.id)));
+    if (exists.length === 0) {
+        throw new Error("Server not found or unauthorized");
+    }
+    const res = await fetch(
+        `${process.env.VM_CONTROLLER_ENDPOINT}/domains/${id}/restart`,
+        {
+            method: "POST",
+        },
+    );
+    if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.message || "Failed to restart server");
+    }
+}
+
 export async function deleteServer(id: string) {
     const session = await auth.api.getSession({
         headers: await headers(),
