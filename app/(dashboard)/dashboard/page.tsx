@@ -17,6 +17,14 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
+interface Server {
+    id: string;
+    type: string;
+    name: string;
+    ip: string;
+    state: string;
+}
+
 const Page: NextPage = async () => {
     const session = await auth.api.getSession({
         headers: await headers(),
@@ -25,6 +33,32 @@ const Page: NextPage = async () => {
         .select()
         .from(server)
         .where(eq(server.authorId, session?.user.id as string));
+    // Queryを生成
+    // running=true&domains=aa,bb,cc
+    const params = new URLSearchParams({
+        running: "true",
+        domains: servers.map((s) => s.id).join(","),
+    }).toString();
+    const res = await fetch(
+        `${process.env.VM_CONTROLLER_ENDPOINT}/domains?${params}`,
+    );
+    // DBとAPIのデータを結合
+    const data = await res.json();
+    console.log(data);
+    const serversWithState = servers.map((server) => {
+        if (data?.domains !== null && data?.domains.includes(server.name)) {
+            return {
+                ...server,
+                state: "online",
+            };
+        } else {
+            return {
+                ...server,
+                state: "offline",
+            };
+        }
+    });
+    console.log(serversWithState);
     return (
         <>
             <div className="flex items-center justify-between">
@@ -47,10 +81,10 @@ const Page: NextPage = async () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {servers.map((server, index) => (
+                    {serversWithState.map((server, index) => (
                         <ServerTableRow
                             key={index}
-                            status="online"
+                            status={server.state}
                             type={server.type}
                             name={server.name}
                             ip={server.ip}
