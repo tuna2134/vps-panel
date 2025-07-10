@@ -9,29 +9,6 @@ services:
             - "5432:5432"
         volumes:
             - db_data:/var/lib/postgresql/data
-    dev:
-        build:
-            context: .
-            dockerfile: docker/dev.Dockerfile
-        ports:
-            - "3000:3000"
-        environment:
-            DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
-        depends_on:
-            - db
-        env_file:
-            - .env
-        extra_hosts:
-            - "host.docker.internal:host-gateway"
-        volumes:
-            - .:/src
-            - /src/node_modules
-    init_db:
-        build:
-            context: .
-            dockerfile: docker/db.Dockerfile
-        environment:
-            DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
 
 volumes:
     db_data:

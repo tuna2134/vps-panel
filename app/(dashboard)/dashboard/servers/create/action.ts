@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { server } from "@/lib/db/schemas";
 import { headers } from "next/headers";
 import { plans } from "@/data/config.json";
+import { cidrToIpList } from "@/lib/ipCalc";
 
 function generatePassword(length: number): string {
     const charset =
@@ -21,8 +22,24 @@ export async function createServer(name: string, type: string, os: string) {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
-    const address = "192.168.122.3/24";
+    if (!session?.user) {
+        throw new Error("Unauthorized");
+    }
+    const existingIP = await db
+        .select({
+            ip: server.ip,
+        })
+        .from(server);
+    const [ipList, prefix] = cidrToIpList("192.168.122.0/24");
+    const usedIPs = existingIP.map((item) => item.ip);
     const gateway = "192.168.122.1";
+    const unusedIPs = ipList.filter(
+        (ip) => !usedIPs.includes(ip) && ip !== `${gateway}/${prefix}`,
+    );
+    const address = unusedIPs.shift();
+    if (!address) {
+        throw new Error("No available IP addresses");
+    }
     const plan = plans.find((plan) => plan.id === parseInt(type));
     const res = await fetch(`${process.env.VM_CONTROLLER_ENDPOINT}/domains`, {
         method: "POST",
