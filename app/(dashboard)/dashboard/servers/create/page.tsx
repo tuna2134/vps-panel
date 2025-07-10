@@ -43,7 +43,7 @@ const Page: NextPage = () => {
         defaultValues: {
             name: "",
             type: "",
-            os: "linux",
+            os: "",
         },
     });
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -147,6 +147,27 @@ const Page: NextPage = () => {
                                 </Select>
                                 <FormDescription>
                                     Select the operating system for the server.
+                                </FormDescription>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type="password"
+                                        placeholder="Enter a strong password (min 10 characters)"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormDescription>
+                                    Password for the server. It must be at least 10
+                                    characters long.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>
