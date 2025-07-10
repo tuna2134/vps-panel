@@ -24,7 +24,9 @@ export async function createServer(
             ip: server.ip,
         })
         .from(server);
-    const [ipList, prefix] = cidrToIpList(process.env.NETWORK_CIDR || "192.168.122.0/24");
+    const [ipList, prefix] = cidrToIpList(
+        process.env.NETWORK_CIDR || "192.168.122.0/24",
+    );
     const usedIPs = existingIP.map((item) => item.ip);
     const gateway = process.env.NETWORK_GATEWAY || "192.168.122.1";
     const unusedIPs = ipList.filter(

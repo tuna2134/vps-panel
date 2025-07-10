@@ -14,6 +14,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ServerTable from "@/components/pages/dashboard/server/ServerTable";
 
 interface ServerParams {
     serverId: string;
@@ -66,50 +67,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                     />
                 </div>
                 <div className="mt-18">
-                    <Table>
-                        <TableBody>
-                            <TableRow>
-                                <TableCell className="font-bold">
-                                    IPアドレス
-                                </TableCell>
-                                <TableCell>{serverData.ip}</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell className="font-bold">
-                                    ゲートウェイ
-                                </TableCell>
-                                <TableCell>192.168.122.1</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell className="font-bold">
-                                    プラン
-                                </TableCell>
-                                <TableCell>
-                                    <Tooltip>
-                                        <TooltipTrigger>
-                                            {plan.name}
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                            <div className="flex flex-col">
-                                                <span>
-                                                    CPU: {plan.resource.cpu}コア
-                                                </span>
-                                                <span>
-                                                    RAM:{" "}
-                                                    {plan.resource.memory /
-                                                        1024}
-                                                    GB
-                                                </span>
-                                                <span>
-                                                    Disk: {plan.resource.disk}GB
-                                                </span>
-                                            </div>
-                                        </TooltipContent>
-                                    </Tooltip>
-                                </TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <ServerTable ip={serverData.ip} plan={plan} />
                 </div>
             </div>
         </>
