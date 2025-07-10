@@ -34,10 +34,16 @@ const Page: NextPage<PageProps> = async ({ params }) => {
     if (!serverData) {
         notFound();
     }
+    const res = await fetch(
+        `${process.env.VM_CONTROLLER_ENDPOINT}/domains/${serverId}`,
+    );
+    const data = await res.json();
+    const status: "online" | "offline" =
+        data.status === "running" ? "online" : "offline";
     return (
         <>
             <div>
-                <ServerDetail serverName={serverData.name} />
+                <ServerDetail serverName={serverData.name} status={status} />
             </div>
         </>
     );
