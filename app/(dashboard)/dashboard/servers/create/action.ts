@@ -45,6 +45,7 @@ export async function createServer(
             network: {
                 address: address,
                 gateway: gateway,
+                interface: process.env.NETWORK_INTERFACE || "vmbr0",
             },
             resources: {
                 cpu: plan?.resource.cpu,
