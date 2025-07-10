@@ -11,6 +11,7 @@ import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { server } from "@/lib/db/schemas";
 import { eq } from "drizzle-orm";
+import { Server } from "iconoir-react";
 import { Plus } from "lucide-react";
 import { NextPage } from "next";
 import { headers } from "next/headers";
@@ -71,29 +72,38 @@ const Page: NextPage = async () => {
                     </Link>
                 </Button>
             </div>
-            <Table className="mt-4">
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[200px]">Status</TableHead>
-                        <TableHead>Type</TableHead>
-                        <TableHead>Name</TableHead>
-                        <TableHead>IP</TableHead>
-                        <TableHead></TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {serversWithState.map((server, index) => (
-                        <ServerTableRow
-                            key={index}
-                            status={server.state}
-                            type={server.type}
-                            name={server.name}
-                            ip={server.ip}
-                            id={server.id}
-                        />
-                    ))}
-                </TableBody>
-            </Table>
+            {serversWithState.length === 0 ? (
+                <div className="mt-4">
+                    <p>
+                        サーバが作成されていないため、ありません。 Add
+                        Serverボタンをクリックしてサーバを作成してください。
+                    </p>
+                </div>
+            ) : (
+                <Table className="mt-4">
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="w-[200px]">Status</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Name</TableHead>
+                            <TableHead>IP</TableHead>
+                            <TableHead></TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {serversWithState.map((server, index) => (
+                            <ServerTableRow
+                                key={index}
+                                status={server.state}
+                                type={server.type}
+                                name={server.name}
+                                ip={server.ip}
+                                id={server.id}
+                            />
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
         </>
     );
 };
