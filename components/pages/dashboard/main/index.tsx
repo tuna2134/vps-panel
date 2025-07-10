@@ -25,7 +25,7 @@ interface ActionProps {
     online: boolean;
 }
 
-const Action: React.FC<ActionProps> = ({ serverId, online }) => {
+export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     const handleDelete = async () => {
         toast("Deleting server...");
         try {
