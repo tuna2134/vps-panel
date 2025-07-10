@@ -70,7 +70,7 @@ const Page: NextPage = () => {
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="mt-6 w-2/3 space-y-8"
+                    className="mt-6 w-full md:w-2/3 space-y-8"
                 >
                     <FormField
                         control={form.control}
