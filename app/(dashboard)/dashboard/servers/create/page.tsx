@@ -32,7 +32,9 @@ const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
     type: z.string().min(1, "Server type is required"),
     os: z.string().min(1, "Operating system is required"),
-    password: z.string().min(10, "Password must be at least 10 characters long"),
+    password: z
+        .string()
+        .min(10, "Password must be at least 10 characters long"),
 });
 
 const Page: NextPage = () => {
@@ -49,7 +51,12 @@ const Page: NextPage = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         toast("Creating server...");
         setClicked(true);
-        await createServer(values.name, values.type, values.os, values.password);
+        await createServer(
+            values.name,
+            values.type,
+            values.os,
+            values.password,
+        );
         toast.success("Server created successfully!");
         router.push("/dashboard");
     };
@@ -166,8 +173,8 @@ const Page: NextPage = () => {
                                     />
                                 </FormControl>
                                 <FormDescription>
-                                    Password for the server. It must be at least 10
-                                    characters long.
+                                    Password for the server. It must be at least
+                                    10 characters long.
                                 </FormDescription>
                                 <FormMessage />
                             </FormItem>

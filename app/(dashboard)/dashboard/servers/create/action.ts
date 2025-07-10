@@ -7,7 +7,12 @@ import { headers } from "next/headers";
 import { plans } from "@/data/config.json";
 import { cidrToIpList } from "@/lib/ipCalc";
 
-export async function createServer(name: string, type: string, os: string, password: string) {
+export async function createServer(
+    name: string,
+    type: string,
+    os: string,
+    password: string,
+) {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
