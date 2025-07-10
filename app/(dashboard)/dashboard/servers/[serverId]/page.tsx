@@ -1,6 +1,5 @@
 import { Action } from "@/components/pages/dashboard/main";
 import { ServerDetail } from "@/components/pages/dashboard/server";
-import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { server } from "@/lib/db/schemas";
@@ -9,11 +8,6 @@ import { NextPage } from "next";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { plans } from "@/data/config.json";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
 import ServerTable from "@/components/pages/dashboard/server/ServerTable";
 
 interface ServerParams {
