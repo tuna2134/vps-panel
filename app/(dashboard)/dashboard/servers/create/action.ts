@@ -7,18 +7,7 @@ import { headers } from "next/headers";
 import { plans } from "@/data/config.json";
 import { cidrToIpList } from "@/lib/ipCalc";
 
-function generatePassword(length: number): string {
-    const charset =
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let password = "";
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        password += charset[randomIndex];
-    }
-    return password;
-}
-
-export async function createServer(name: string, type: string, os: string) {
+export async function createServer(name: string, type: string, os: string, password: string) {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
@@ -47,7 +36,7 @@ export async function createServer(name: string, type: string, os: string) {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            password: generatePassword(16),
+            password: password,
             network: {
                 address: address,
                 gateway: gateway,

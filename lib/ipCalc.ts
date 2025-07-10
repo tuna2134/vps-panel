@@ -26,5 +26,3 @@ export function cidrToIpList(cidr: string): [string[], string] {
 
     return [ipList, prefix];
 }
-
-console.log(cidrToIpList("192.168.1.0/24"));
