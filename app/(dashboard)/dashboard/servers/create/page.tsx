@@ -160,8 +160,8 @@ const Page: NextPage = () => {
                                 <FormLabel>Password</FormLabel>
                                 <FormControl>
                                     <Input
-                                        type="password"
                                         placeholder="Enter a strong password (min 10 characters)"
+                                        type="password"
                                         {...field}
                                     />
                                 </FormControl>
