@@ -1,4 +1,5 @@
 import Header from "@/components/pages/main/Header";
+import Footer from "@/components/pages/main/Footer";
 
 interface LayoutProps {
     children: React.ReactNode;
@@ -9,6 +10,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <>
             <Header />
             <main className="mx-auto w-full max-w-3xl px-4">{children}</main>
+            <Footer />
         </>
     );
 };

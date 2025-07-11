@@ -17,11 +17,21 @@ const Page: NextPage = () => {
                     </p>
                 </div>
             </div>
-            <div className="mt-6">
+            <div className="my-20">
                 <h2 className="text-xl font-semibold tracking-wider text-purple-500">
                     運用体制
                 </h2>
                 <p>ベストエフォート型となっています。</p>
+            </div>
+            <div className="my-20">
+                <h2 className="text-xl font-semibold tracking-wider text-purple-500">
+                    完全無料
+                </h2>
+                <p>
+                    学生のために、存在するため、料金は無料です。
+                    <br />
+                    ※ただし、利用するにあたって審査を行い、120名までの学生に限定しています。
+                </p>
             </div>
         </>
     );
