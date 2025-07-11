@@ -19,8 +19,13 @@ const Header: React.FC = () => {
                     {isLoggedIn ? (
                         <Link href="/dashboard" className="flex items-center">
                             <Avatar>
-                                <AvatarImage src={session.data?.user?.image || ""} alt="User Avatar" />
-                                <AvatarFallback>{session.data?.user?.name}</AvatarFallback>
+                                <AvatarImage
+                                    src={session.data?.user?.image || ""}
+                                    alt="User Avatar"
+                                />
+                                <AvatarFallback>
+                                    {session.data?.user?.name}
+                                </AvatarFallback>
                             </Avatar>
                         </Link>
                     ) : (
