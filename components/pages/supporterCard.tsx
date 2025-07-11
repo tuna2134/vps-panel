@@ -7,20 +7,25 @@ import {
 import { Globe } from "lucide-react";
 import Image from "next/image";
 
-interface Props {
+interface BaseProps {
     isPrepare?: boolean;
-    title?: string;
-    image?: string;
-    website?: string;
 }
 
-export const SupporterCard: React.FC<Props> = ({
-    title,
-    image,
-    website,
-    isPrepare,
-}) => {
-    if (isPrepare) {
+interface PrepareProps extends BaseProps {
+    isPrepare: true;
+}
+
+interface NonPrepareProps extends BaseProps {
+    isPrepare?: false;
+    title: string;
+    image: string;
+    website: string;
+}
+
+type Props = PrepareProps | NonPrepareProps;
+
+export const SupporterCard: React.FC<Props> = (props) => {
+    if (props.isPrepare) {
         return (
             <Card className="h-full w-full shadow-lg transition-shadow duration-300 hover:shadow-xl">
                 <CardContent
@@ -33,6 +38,8 @@ export const SupporterCard: React.FC<Props> = ({
             </Card>
         );
     }
+
+    const { title, image, website } = props;
 
     return (
         <Card className="h-full w-full shadow-lg transition-shadow duration-300 hover:shadow-xl justify-between">
