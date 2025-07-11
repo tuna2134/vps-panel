@@ -12,6 +12,7 @@ import { Server } from "lucide-react";
 import React from "react";
 import Link from "next/link";
 import { AppSidebarFooter } from "./footer";
+import { Terminal } from "iconoir-react";
 
 const AppSidebarContent: React.FC = () => {
     return (
@@ -25,6 +26,14 @@ const AppSidebarContent: React.FC = () => {
                                     <Server />
                                     <span className="ml-1 font-bold">
                                         Server
+                                    </span>
+                                </Link>
+                            </SidebarMenuButton>
+                            <SidebarMenuButton asChild>
+                                <Link href="/dashboard/setup-scripts" className="ml-1">
+                                    <Terminal />
+                                    <span className="ml-1 font-bold">
+                                        Setup scripts
                                     </span>
                                 </Link>
                             </SidebarMenuButton>
