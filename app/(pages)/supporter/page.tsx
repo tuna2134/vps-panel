@@ -14,7 +14,13 @@ const Page: NextPage = () => {
             </p>
             <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div className="rounded-lg border p-4 shadow">
-                    <p className="mb-2 text-center font-semibold">準備中</p>
+                    <Image
+                        src="/images/no_image_yoko.jpg"
+                        alt="no image"
+                        height={266}
+                        width={400}
+                    />
+                    <p className="mb-2 text-center font-semibold">IPA ICSCoE CyberLab</p>
                 </div>
                 <div className="rounded-lg border p-4 shadow">
                     <p className="mb-2 text-center font-semibold">準備中</p>
