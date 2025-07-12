@@ -42,7 +42,7 @@ export const SupporterCard: React.FC<Props> = (props) => {
     const { title, image, website } = props;
 
     return (
-        <Card className="h-full w-full shadow-lg transition-shadow duration-300 hover:shadow-xl justify-between">
+        <Card className="h-full w-full justify-between shadow-lg transition-shadow duration-300 hover:shadow-xl">
             <CardHeader>
                 <Image src={image} alt={title} width={200} height={100} />
                 <p className="mb-2 text-center text-lg font-semibold">

@@ -1,18 +1,26 @@
 "use client";
 import { NextPage } from "next";
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+    Form,
+    FormControl,
+    FormDescription,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import Editor from '@monaco-editor/react';
+import Editor from "@monaco-editor/react";
 import { Button } from "@/components/ui/button";
 
 const Page: NextPage = () => {
     const formSchema = z.object({
         name: z.string().min(1, "名前は必須です"),
-        description: z.string(). min(10, "10文字以上の説明が必要です"),
+        description: z.string().min(10, "10文字以上の説明が必要です"),
         script: z.string().min(1, "スクリプトは必須です"),
     });
     const formMethods = useForm({
@@ -29,10 +37,15 @@ const Page: NextPage = () => {
     return (
         <>
             <div>
-                <h2 className="text-2xl font-bold tracking-wider">セットアップスクリプトの作成</h2>
+                <h2 className="text-2xl font-bold tracking-wider">
+                    セットアップスクリプトの作成
+                </h2>
             </div>
             <Form {...formMethods}>
-                <form className="my-8 space-y-4" onSubmit={formMethods.handleSubmit(onSubmit)}>
+                <form
+                    className="my-8 space-y-4"
+                    onSubmit={formMethods.handleSubmit(onSubmit)}
+                >
                     <FormField
                         control={formMethods.control}
                         name="name"
@@ -98,6 +111,6 @@ const Page: NextPage = () => {
             </Form>
         </>
     );
-}
+};
 
 export default Page;

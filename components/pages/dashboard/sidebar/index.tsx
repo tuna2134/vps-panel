@@ -30,7 +30,10 @@ const AppSidebarContent: React.FC = () => {
                                 </Link>
                             </SidebarMenuButton>
                             <SidebarMenuButton asChild>
-                                <Link href="/dashboard/setup-scripts" className="ml-1">
+                                <Link
+                                    href="/dashboard/setup-scripts"
+                                    className="ml-1"
+                                >
                                     <Terminal />
                                     <span className="ml-1 font-bold">
                                         Setup scripts
