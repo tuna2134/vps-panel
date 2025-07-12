@@ -6,11 +6,11 @@ import { setupScript } from "@/lib/db/schemas/setupScript";
 import { headers } from "next/headers";
 
 export async function createSetupScript(
-    id: string,
     title: string,
     description: string,
     script: string,
 ) {
+    const id = crypto.randomUUID();
     const session = await auth.api.getSession({
         headers: await headers(),
     });

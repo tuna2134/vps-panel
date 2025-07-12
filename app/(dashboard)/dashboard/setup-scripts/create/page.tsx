@@ -41,12 +41,7 @@ const Page: NextPage = () => {
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         setClicked(true);
         try {
-            await createSetupScript(
-                crypto.randomUUID(),
-                data.name,
-                data.description,
-                data.script,
-            );
+            await createSetupScript(data.name, data.description, data.script);
             toast.success("スクリプトが作成されました。");
             router.push("/dashboard/setup-scripts");
         } catch (error) {
