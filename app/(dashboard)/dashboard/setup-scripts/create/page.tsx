@@ -109,6 +109,7 @@ const Page: NextPage = () => {
                                     <Editor
                                         defaultLanguage="bash"
                                         height="90vh"
+                                        className="rounded-lg border"
                                         {...field}
                                     />
                                 </FormControl>
