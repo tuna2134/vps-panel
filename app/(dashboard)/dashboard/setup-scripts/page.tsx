@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Plus } from "iconoir-react";
 import { NextPage } from "next";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ const Page: NextPage = () => {
                     <h2 className="text-2xl font-bold tracking-wider">セットアップスクリプト</h2>
                     <Button asChild variant="outline">
                         <Link href="/dashboard/setup-scripts/create" className="mt-4">
+                            <Plus />
                             スクリプトを作成する
                         </Link>
                     </Button>
