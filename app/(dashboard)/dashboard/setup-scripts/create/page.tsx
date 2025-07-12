@@ -16,8 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Editor from "@monaco-editor/react";
 import { Button } from "@/components/ui/button";
+import React from "react";
+import { Refresh } from "iconoir-react";
+import { createSetupScript } from "./action";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Page: NextPage = () => {
+    const [clicked, setClicked] = React.useState(false);
+    const router = useRouter();
     const formSchema = z.object({
         name: z.string().min(1, "名前は必須です"),
         description: z.string().min(10, "10文字以上の説明が必要です"),
@@ -31,8 +38,20 @@ const Page: NextPage = () => {
             script: "",
         },
     });
-    const onSubmit = (data: z.infer<typeof formSchema>) => {
-        console.log("Form submitted:", data);
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+        setClicked(true);
+        try {
+            await createSetupScript(
+                crypto.randomUUID(),
+                data.name,
+                data.description,
+                data.script,
+            );
+            toast.success("スクリプトが作成されました。");
+            router.push("/dashboard/setup-scripts");
+        } catch (error) {
+            toast.error("スクリプトの作成に失敗しました。");
+        }
     };
     return (
         <>
@@ -105,6 +124,7 @@ const Page: NextPage = () => {
                         )}
                     />
                     <Button type="submit" className="mt-4">
+                        {clicked && <Refresh className="mr-2 animate-spin" />}
                         スクリプトを作成する
                     </Button>
                 </form>
