@@ -50,3 +50,5 @@ const Page: NextPage = async () => {
 };
 
 export default Page;
+
+export const dynamic = 'force-dynamic';
