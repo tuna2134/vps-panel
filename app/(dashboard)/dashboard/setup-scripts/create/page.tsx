@@ -51,6 +51,7 @@ const Page: NextPage = () => {
             router.push("/dashboard/setup-scripts");
         } catch (error) {
             toast.error("スクリプトの作成に失敗しました。");
+            console.error("Error creating setup script:", error);
         }
     };
     return (
