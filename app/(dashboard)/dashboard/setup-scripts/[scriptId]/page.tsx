@@ -38,7 +38,9 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                         スクリプト名: {script[0]?.name || "不明"}
                     </p>
                 </div>
-                {script[0]?.authorId === session.user.id && <EditAndDelete />}
+                {script[0]?.authorId === session.user.id && (
+                    <EditAndDelete scriptId={scriptId} />
+                )}
             </div>
             <div className="mt-8">
                 <pre className="rounded bg-gray-100 p-4">
