@@ -10,6 +10,7 @@ import { Bin, Edit, MoreVert } from "iconoir-react";
 import { toast } from "sonner";
 import { deleteScript } from "./action";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface EditAndDeleteProps {
     scriptId: string;
@@ -36,9 +37,13 @@ export const EditAndDelete: React.FC<EditAndDeleteProps> = ({ scriptId }) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent>
                 <DropdownMenuItem>
-                    <Button variant="outline" className="w-full">
-                        <Edit />
-                        編集
+                    <Button variant="outline" className="w-full" asChild>
+                        <Link
+                            href={`/dashboard/setup-scripts/${scriptId}/edit`}
+                        >
+                            <Edit />
+                            編集
+                        </Link>
                     </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>

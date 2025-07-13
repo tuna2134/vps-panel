@@ -59,11 +59,12 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     const onSubmit = async (data: z.infer<typeof setupScriptFormSchema>) => {
         setClicked(true);
         try {
-            toast.success("スクリプトが作成されました。");
+            toast("処理を実行中...");
             await editAction(data, scriptId);
+            toast("処理が実行完了しました。")
             router.push("/dashboard/setup-scripts");
         } catch (error) {
-            toast.error("スクリプトの作成に失敗しました。");
+            toast.error("処理に失敗しました。");
             console.error("Error creating setup script:", error);
         }
     };
