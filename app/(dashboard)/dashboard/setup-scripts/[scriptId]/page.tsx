@@ -5,7 +5,7 @@ import { eq } from "drizzle-orm";
 import { NextPage } from "next";
 import { headers } from "next/headers";
 import { unauthorized } from "next/navigation";
-import { EditAndDelete } from "@/components/pages/SetupScript";
+import { EditAndDelete } from "@/components/pages/dashboard/SetupScript";
 
 interface Params {
     scriptId: string;

@@ -1,14 +1,14 @@
 "use server";
 
+import { setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { setupScript } from "@/lib/db/schemas/setupScript";
 import { headers } from "next/headers";
+import { z } from "zod";
 
 export async function createSetupScript(
-    title: string,
-    description: string,
-    script: string,
+    data: z.infer<typeof setupScriptFormSchema>,
 ) {
     const id = crypto.randomUUID();
     const session = await auth.api.getSession({
@@ -19,9 +19,9 @@ export async function createSetupScript(
     }
     await db.insert(setupScript).values({
         id,
-        name: title,
-        description,
-        script,
+        name: data.name,
+        description: data.description,
+        script: data.script,
         authorId: session.user.id as string,
     });
 }
