@@ -48,7 +48,7 @@ export const EditAndDelete: React.FC<EditAndDeleteProps> = ({ scriptId }) => {
                         onClick={handleDelete}
                     >
                         <Bin className="text-white" />
-                        編集
+                        削除
                     </Button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
