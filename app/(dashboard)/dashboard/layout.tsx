@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = async ({ children }) => {
     return (
         <SidebarProvider>
             <AppSidebar />
-            <main className="mx-auto mt-14 max-w-4xl flex-1 px-4">
+            <main className="mx-auto my-14 max-w-4xl flex-1 px-4">
                 {children}
             </main>
         </SidebarProvider>
