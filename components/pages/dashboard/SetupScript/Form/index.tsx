@@ -61,7 +61,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
         try {
             toast("処理を実行中...");
             await editAction(data, scriptId);
-            toast("処理が実行完了しました。")
+            toast("処理が実行完了しました。");
             router.push("/dashboard/setup-scripts");
         } catch (error) {
             toast.error("処理に失敗しました。");
