@@ -27,6 +27,7 @@ interface SetupScriptFormProps {
     ) => Promise<void>;
     buttonName: string;
     scriptId?: string;
+    defaultData?: z.infer<typeof setupScriptFormSchema>;
 }
 
 export const setupScriptFormSchema = z.object({
@@ -39,15 +40,20 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     editAction,
     buttonName,
     scriptId,
+    defaultData = {
+        name: "",
+        description: "",
+        script: "",
+    },
 }) => {
     const [clicked, setClicked] = React.useState(false);
     const router = useRouter();
     const formMethods = useForm({
         resolver: zodResolver(setupScriptFormSchema),
         defaultValues: {
-            name: "",
-            description: "",
-            script: "",
+            name: defaultData.name,
+            description: defaultData.description,
+            script: defaultData.script,
         },
     });
     const onSubmit = async (data: z.infer<typeof setupScriptFormSchema>) => {

@@ -4,7 +4,7 @@ import { setupScript } from "@/lib/db/schemas/setupScript";
 import { eq } from "drizzle-orm";
 import { NextPage } from "next";
 import { headers } from "next/headers";
-import { unauthorized } from "next/navigation";
+import { notFound, unauthorized } from "next/navigation";
 import { EditAndDelete } from "@/components/pages/dashboard/SetupScript";
 
 interface Params {
@@ -27,6 +27,9 @@ const Page: NextPage<PageProps> = async ({ params }) => {
         .select()
         .from(setupScript)
         .where(eq(setupScript.id, scriptId));
+    if (script.length === 0) {
+        return notFound();
+    }
     return (
         <>
             <div className="flex items-center justify-between">
