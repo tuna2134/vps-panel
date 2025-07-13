@@ -21,8 +21,12 @@ import React from "react";
 import { Refresh } from "iconoir-react";
 
 interface SetupScriptFormProps {
-    editAction: (data: z.infer<typeof setupScriptFormSchema>) => Promise<void>;
+    editAction: (
+        data: z.infer<typeof setupScriptFormSchema>,
+        scriptId?: string,
+    ) => Promise<void>;
     buttonName: string;
+    scriptId?: string;
 }
 
 export const setupScriptFormSchema = z.object({
@@ -34,6 +38,7 @@ export const setupScriptFormSchema = z.object({
 export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     editAction,
     buttonName,
+    scriptId,
 }) => {
     const [clicked, setClicked] = React.useState(false);
     const router = useRouter();
@@ -49,7 +54,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
         setClicked(true);
         try {
             toast.success("スクリプトが作成されました。");
-            await editAction(data);
+            await editAction(data, scriptId);
             router.push("/dashboard/setup-scripts");
         } catch (error) {
             toast.error("スクリプトの作成に失敗しました。");

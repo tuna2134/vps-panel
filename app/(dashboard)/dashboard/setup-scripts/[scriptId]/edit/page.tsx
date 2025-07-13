@@ -1,4 +1,7 @@
+"use server";
 import { NextPage } from "next";
+import { editSetupScript } from "./action";
+import { SetupScriptEditPage } from "@/components/pages/dashboard/SetupScript/Form";
 
 interface Params {
     scriptId: string;
@@ -11,12 +14,19 @@ interface PageProps {
 const Page: NextPage<PageProps> = async ({ params }) => {
     const { scriptId } = await params;
 
-    // Placeholder for the actual implementation
     return (
-        <div>
-            <h1>Edit Script: {scriptId}</h1>
-            {/* Add your edit form or component here */}
-        </div>
+        <>
+            <div>
+                <h2 className="text-2xl font-semibold">
+                    Edit Script: {scriptId}
+                </h2>
+            </div>
+            <SetupScriptEditPage
+                editAction={editSetupScript}
+                buttonName="スクリプトを更新する"
+                scriptId={scriptId}
+            />
+        </>
     );
 };
 
