@@ -61,6 +61,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
             values.type,
             values.os,
             values.password,
+            values.setupScript === "none" ? undefined : values.setupScript,
         );
         toast.success("Server created successfully!");
         router.push("/dashboard");

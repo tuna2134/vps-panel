@@ -6,12 +6,30 @@ import { server } from "@/lib/db/schemas";
 import { headers } from "next/headers";
 import { plans } from "@/data/config.json";
 import { cidrToIpList } from "@/lib/ipCalc";
+import { setupScript } from "@/lib/db/schemas/setupScript";
+import { eq } from "drizzle-orm";
+
+interface CreateServerPayload {
+    password: string;
+    network: {
+        address: string;
+        gateway: string;
+        interface: string;
+    };
+    resources: {
+        cpu: number;
+        memory: number;
+        disk: string;
+    };
+    runcmd?: string[];
+}
 
 export async function createServer(
     name: string,
     type: string,
     os: string,
     password: string,
+    setupScriptId?: string,
 ) {
     const session = await auth.api.getSession({
         headers: await headers(),
@@ -37,24 +55,36 @@ export async function createServer(
         throw new Error("No available IP addresses");
     }
     const plan = plans.find((plan) => plan.id === parseInt(type));
+    const payload: CreateServerPayload = {
+        password: password,
+        network: {
+            address: address,
+            gateway: gateway,
+            interface: process.env.NETWORK_INTERFACE || "vmbr0",
+        },
+        resources: {
+            cpu: plan?.resource.cpu as number,
+            memory: (plan?.resource.memory || 1024) / 1024,
+            disk: `${plan?.resource.disk}G`,
+        },
+    };
+    if (setupScriptId) {
+        const script = (await db
+            .select({
+                script: setupScript.script,
+            })
+            .from(setupScript)
+            .where(eq(setupScript.id, setupScriptId))) as { script: string }[];
+        if (script) {
+            payload.runcmd = [script[0].script];
+        }
+    }
     const res = await fetch(`${process.env.VM_CONTROLLER_ENDPOINT}/domains`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            password: password,
-            network: {
-                address: address,
-                gateway: gateway,
-                interface: process.env.NETWORK_INTERFACE || "vmbr0",
-            },
-            resources: {
-                cpu: plan?.resource.cpu,
-                memory: (plan?.resource.memory || 1024) / 1024,
-                disk: `${plan?.resource.disk}G`,
-            },
-        }),
+        body: JSON.stringify(payload),
     });
     const data = await res.json();
     if (!res.ok) {
