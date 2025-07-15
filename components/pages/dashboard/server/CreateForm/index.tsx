@@ -80,13 +80,12 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                             <FormLabel>Server name</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="Enter server name"
+                                    placeholder="サーバーの名前を入力してください。"
                                     {...field}
                                 />
                             </FormControl>
                             <FormDescription>
-                                This is the name of the server that will be
-                                displayed in the dashboard.
+                                ダッシュボードに表示したいサーバの名前を入力してください。
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -104,7 +103,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                             >
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select server type" />
+                                        <SelectValue placeholder="サーバのタイプを選んでください。" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
@@ -119,8 +118,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                                 </SelectContent>
                             </Select>
                             <FormDescription>
-                                memory, cpu, disk, etc. This is the type of
-                                server you are adding.
+                                サーバのディスク、メモリ、CPUなどを選択してください。
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -138,7 +136,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                             >
                                 <FormControl>
                                     <SelectTrigger>
-                                        <SelectValue placeholder="Select server OS" />
+                                        <SelectValue placeholder="サーバのOSを選択してください。" />
                                     </SelectTrigger>
                                 </FormControl>
                                 <SelectContent>
@@ -153,7 +151,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                                 </SelectContent>
                             </Select>
                             <FormDescription>
-                                Select the operating system for the server.
+                                サーバのOSを選択してください。現時点ではUbuntuのみとなっています。
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -167,14 +165,13 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                             <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="Enter a strong password (min 10 characters)"
+                                    placeholder="十文字以上のパスワードを入力してください。"
                                     type="password"
                                     {...field}
                                 />
                             </FormControl>
                             <FormDescription>
-                                Password for the server. It must be at least 10
-                                characters long.
+                                サーバのパスワードを十文字以上で入力してください。サーバのログインに使います。
                             </FormDescription>
                             <FormMessage />
                         </FormItem>

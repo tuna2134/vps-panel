@@ -24,7 +24,7 @@ const Page: NextPage = async () => {
         <>
             <div>
                 <h1 className="text-2xl font-bold tracking-wider">
-                    Add Server
+                    サーバを作成
                 </h1>
             </div>
             <CreateForm scripts={scripts} />
