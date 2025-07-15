@@ -21,7 +21,7 @@ interface CreateServerPayload {
         memory: number;
         disk: string;
     };
-    runcmd?: string[];
+    script?: string;
 }
 
 export async function createServer(
@@ -76,7 +76,7 @@ export async function createServer(
             .from(setupScript)
             .where(eq(setupScript.id, setupScriptId))) as { script: string }[];
         if (script) {
-            payload.runcmd = [script[0].script];
+            payload.script = script[0].script;
         }
     }
     const res = await fetch(`${process.env.VM_CONTROLLER_ENDPOINT}/domains`, {
