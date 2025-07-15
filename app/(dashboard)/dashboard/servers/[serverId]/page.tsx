@@ -61,7 +61,7 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                     />
                 </div>
                 <div className="mt-18">
-                    <ServerTable ip={serverData.ip} plan={plan} />
+                    <ServerTable ip={serverData.ip} plan={plan} id={serverId} />
                 </div>
             </div>
         </>

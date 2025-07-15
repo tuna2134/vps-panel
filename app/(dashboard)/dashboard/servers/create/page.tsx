@@ -13,7 +13,7 @@ const Page: NextPage = async () => {
     if (!session?.user) {
         unauthorized();
     }
-    
+
     const scripts = await db
         .select({
             id: setupScript.id,

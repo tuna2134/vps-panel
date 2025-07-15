@@ -70,7 +70,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     };
     const handleEditorDidMount: OnMount = (editor, monaco) => {
         editor.getModel()?.setEOL(monaco.editor.EndOfLineSequence.LF);
-    }
+    };
     return (
         <Form {...formMethods}>
             <form

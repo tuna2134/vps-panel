@@ -10,6 +10,7 @@ import React from "react";
 interface Props {
     ip: string;
     plan: PropsPlan;
+    id: string;
 }
 
 interface PropsPlan {
@@ -21,10 +22,14 @@ interface PropsPlan {
     };
 }
 
-const ServerTable: React.FC<Props> = ({ ip, plan }) => {
+const ServerTable: React.FC<Props> = ({ ip, plan, id }) => {
     return (
         <Table>
             <TableBody>
+                <TableRow>
+                    <TableCell className="font-bold">サービスID</TableCell>
+                    <TableCell>{id}</TableCell>
+                </TableRow>
                 <TableRow>
                     <TableCell className="font-bold">IPアドレス</TableCell>
                     <TableCell>{ip}</TableCell>
