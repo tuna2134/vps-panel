@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import Editor from "@monaco-editor/react";
+import Editor, { Monaco, OnMount } from "@monaco-editor/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -68,6 +68,9 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
             console.error("Error creating setup script:", error);
         }
     };
+    const handleEditorDidMount: OnMount = (editor, monaco) => {
+        editor.getModel()?.setEOL(monaco.editor.EndOfLineSequence.LF);
+    }
     return (
         <Form {...formMethods}>
             <form
@@ -123,6 +126,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
                                     defaultLanguage="bash"
                                     height="90vh"
                                     className="rounded-lg border"
+                                    onMount={handleEditorDidMount}
                                     {...field}
                                 />
                             </FormControl>
