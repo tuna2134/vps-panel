@@ -112,7 +112,7 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
                                             key={index}
                                             value={plan.id.toString()}
                                         >
-                                            {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory / 1024}G ${plan.resource.disk}`}
+                                            {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory / 1024}G ${plan.resource.disk}GiB`}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>

@@ -8,6 +8,24 @@
                 "disk": 25
             },
             "id": 0
+        },
+        {
+            "name": "mini",
+            "resource": {
+                "cpu": 2,
+                "memory": 2048,
+                "disk": 25
+            },
+            "id": 1
+        },
+        {
+            "name": "standard",
+            "resource": {
+                "cpu": 2,
+                "memory": 4096,
+                "disk": 50
+            },
+            "id": 2
         }
     ],
     "oses": [
