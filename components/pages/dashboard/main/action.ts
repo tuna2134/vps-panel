@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { server } from "@/lib/db/schemas";
 import { eq, and } from "drizzle-orm";
 import { headers } from "next/headers";
+import { unauthorized } from "next/navigation";
 
 export async function shutdownServer(id: string) {
     const session = await auth.api.getSession({
@@ -104,4 +105,14 @@ export async function powerOnServer(id: string) {
         const data = await res.json();
         throw new Error(data.message || "Failed to power on server");
     }
+}
+
+export async function createSerialConsoleToken(path: string): Promise<string> {
+    const session = await auth.api.getSession({
+        headers: await headers(),
+    });
+    if (!session) {
+        unauthorized();
+    }
+    return ""
 }

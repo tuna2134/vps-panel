@@ -18,7 +18,7 @@ import {
     restartServer,
     shutdownServer,
 } from "./action";
-import { OnTag, SystemRestart, SystemShut } from "iconoir-react";
+import { OnTag, SystemRestart, SystemShut, Terminal } from "iconoir-react";
 
 interface ActionProps {
     serverId: string;
@@ -114,6 +114,15 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
                     >
                         <Trash className="text-white" />
                         Delete
+                    </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                    <Button
+                        variant="outline"
+                        className="w-full"
+                    >
+                        <Terminal />
+                        Console
                     </Button>
                 </DropdownMenuItem>
             </DropdownMenuContent>
