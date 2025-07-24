@@ -94,7 +94,7 @@ importers:
         version: 3.3.1
       zod:
         specifier: ^4.0.0
-        version: 4.0.7
+        version: 4.0.8
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -3113,8 +3113,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zod@4.0.7:
-    resolution: {integrity: sha512-AKvYUuvqmyRf21eNxjuO++WPrQHhWg8i/4POzBLL//qVhcxA6gOptSDxXKM2S+uh8FtPV3MU/QZKOxqwsRV5kg==}
+  zod@4.0.8:
+    resolution: {integrity: sha512-+MSh9cZU9r3QKlHqrgHMTSr3QwMGv4PLfR0M4N/sYWV5/x67HgXEhIGObdBkpnX8G78pTgWnIrBL2lZcNJOtfg==}
 
 snapshots:
 
@@ -4379,7 +4379,7 @@ snapshots:
       jose: 5.10.0
       kysely: 0.28.3
       nanostores: 0.11.4
-      zod: 4.0.7
+      zod: 4.0.8
     optionalDependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
@@ -6065,4 +6065,4 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod@4.0.7: {}
+  zod@4.0.8: {}
