@@ -58,7 +58,7 @@ importers:
         version: 17.2.1
       drizzle-orm:
         specifier: ^0.44.2
-        version: 0.44.3(@types/pg@8.15.4)(kysely@0.28.3)(pg@8.16.3)
+        version: 0.44.3(@types/pg@8.15.5)(kysely@0.28.3)(pg@8.16.3)
       iconoir-react:
         specifier: ^7.11.0
         version: 7.11.0(react@19.1.1)
@@ -107,7 +107,7 @@ importers:
         version: 22.16.5
       '@types/pg':
         specifier: ^8.15.4
-        version: 8.15.4
+        version: 8.15.5
       '@types/react':
         specifier: ^19
         version: 19.1.8
@@ -1309,8 +1309,8 @@ packages:
   '@types/node@22.16.5':
     resolution: {integrity: sha512-bJFoMATwIGaxxx8VJPeM8TonI8t579oRvgAuT8zFugJsJZgzqv0Fu8Mhp68iecjzG7cnN3mO2dJQ5uUM2EFrgQ==}
 
-  '@types/pg@8.15.4':
-    resolution: {integrity: sha512-I6UNVBAoYbvuWkkU3oosC8yxqH21f4/Jc4DK71JLG3dT2mdlGe1z+ep/LQGXaKaOgcvUrsQoPRqfgtMcvZiJhg==}
+  '@types/pg@8.15.5':
+    resolution: {integrity: sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==}
 
   '@types/react-dom@19.1.6':
     resolution: {integrity: sha512-4hOiT/dwO8Ko0gV1m/TJZYk3y0KBnY9vzDh7W+DH17b2HFSOGgdj33dhihPeuy3l0q23+4e+hoXHV6hCC4dCXw==}
@@ -2573,9 +2573,6 @@ packages:
     resolution: {integrity: sha512-Tu8jMlcX+9d8+QVzKIvM/uJtp07PKr82IUOYEphaWcoBhIYkoHpLXN3qO59nAI11ripznDsEzEv8nUxBVWajGg==}
     peerDependencies:
       pg: '>=8.0'
-
-  pg-protocol@1.10.0:
-    resolution: {integrity: sha512-IpdytjudNuLv8nhlHs/UrVBhU0e78J0oIS/0AVdTbWxSOkFUVdsHC/NrorO6nXsQNDTT1kzDSOMJubBQviX18Q==}
 
   pg-protocol@1.10.3:
     resolution: {integrity: sha512-6DIBgBQaTKDJyxnXaLiLR8wBpQQcGWuAESkRBX/t6OwA8YsqP+iVSiond2EDy6Y/dsGk8rh/jtax3js5NeV7JQ==}
@@ -4089,10 +4086,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/pg@8.15.4':
+  '@types/pg@8.15.5':
     dependencies:
       '@types/node': 22.16.5
-      pg-protocol: 1.10.0
+      pg-protocol: 1.10.3
       pg-types: 2.2.0
 
   '@types/react-dom@19.1.6(@types/react@19.1.8)':
@@ -4537,9 +4534,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.3(@types/pg@8.15.4)(kysely@0.28.3)(pg@8.16.3):
+  drizzle-orm@0.44.3(@types/pg@8.15.5)(kysely@0.28.3)(pg@8.16.3):
     optionalDependencies:
-      '@types/pg': 8.15.4
+      '@types/pg': 8.15.5
       kysely: 0.28.3
       pg: 8.16.3
 
@@ -5490,8 +5487,6 @@ snapshots:
   pg-pool@3.10.1(pg@8.16.3):
     dependencies:
       pg: 8.16.3
-
-  pg-protocol@1.10.0: {}
 
   pg-protocol@1.10.3: {}
 
