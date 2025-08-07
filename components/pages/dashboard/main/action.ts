@@ -114,5 +114,5 @@ export async function createSerialConsoleToken(path: string): Promise<string> {
     if (!session) {
         unauthorized();
     }
-    return ""
+    return "";
 }

@@ -14,24 +14,17 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronUp, LogOut } from "lucide-react";
-import { authClient, useSession } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { useAtom } from "jotai";
+import { user } from "@/lib/jotai";
+import { deleteCookie } from "cookies-next/client";
 
 export const AppSidebarFooter: React.FC = () => {
     const router = useRouter();
-    const { data: session, error } = useSession();
-    if (error) {
-        console.error("Error fetching session:", error);
-        return null;
-    }
-    const handleSignOut = async () => {
-        await authClient.signOut({
-            fetchOptions: {
-                onSuccess: () => {
-                    router.push("/sign-in");
-                },
-            },
-        });
+    const [data, _] = useAtom(user);
+    const handleSignOut = () => {
+        deleteCookie("token");
+        router.push("/sign-in");
     };
     return (
         <SidebarFooter>
@@ -44,14 +37,14 @@ export const AppSidebarFooter: React.FC = () => {
                                     <Avatar>
                                         <AvatarImage
                                             src={
-                                                session?.user.image || undefined
+                                                data?.avatar_url || undefined
                                             }
                                         />
                                         <AvatarFallback>
-                                            {session?.user.name}
+                                            {data?.username}
                                         </AvatarFallback>
                                     </Avatar>
-                                    <p>{session?.user.name}</p>
+                                    <p>{data?.username}</p>
                                 </div>
                                 <ChevronUp className="ml-auto"></ChevronUp>
                             </SidebarMenuButton>

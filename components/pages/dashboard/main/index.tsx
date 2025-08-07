@@ -117,10 +117,7 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
                     </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                    <Button
-                        variant="outline"
-                        className="w-full"
-                    >
+                    <Button variant="outline" className="w-full">
                         <Terminal />
                         Console
                     </Button>
