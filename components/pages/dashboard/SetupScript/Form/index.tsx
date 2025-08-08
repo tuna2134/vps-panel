@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import Editor, { Monaco, OnMount } from "@monaco-editor/react";
+import Editor, { OnMount } from "@monaco-editor/react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -31,7 +31,7 @@ interface SetupScriptFormProps {
 }
 
 export const setupScriptFormSchema = z.object({
-    name: z.string().min(1, "名前は必須です"),
+    title: z.string().min(1, "名前は必須です"),
     description: z.string().min(10, "10文字以上の説明が必要です"),
     script: z.string().min(1, "スクリプトは必須です"),
 });
@@ -41,7 +41,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     buttonName,
     scriptId,
     defaultData = {
-        name: "",
+        title: "",
         description: "",
         script: "",
     },
@@ -51,7 +51,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
     const formMethods = useForm({
         resolver: zodResolver(setupScriptFormSchema),
         defaultValues: {
-            name: defaultData.name,
+            title: defaultData.title,
             description: defaultData.description,
             script: defaultData.script,
         },
@@ -79,7 +79,7 @@ export const SetupScriptEditPage: React.FC<SetupScriptFormProps> = ({
             >
                 <FormField
                     control={formMethods.control}
-                    name="name"
+                    name="title"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>スクリプトの名称</FormLabel>

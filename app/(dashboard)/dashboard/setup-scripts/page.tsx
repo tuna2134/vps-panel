@@ -1,12 +1,20 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { db } from "@/lib/db";
-import { setupScript } from "@/lib/db/schemas/setupScript";
+import { fetchSetupScripts } from "@/lib/api/setup-scripts";
 import { Plus } from "iconoir-react";
 import { NextPage } from "next";
 import Link from "next/link";
+import useSWR from "swr";
 
-const Page: NextPage = async () => {
-    const scripts = await db.select().from(setupScript);
+const Page: NextPage = () => {
+    const { data, isLoading, error } = useSWR({}, fetchSetupScripts);
+    console.log(data);
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+    if (error) {
+        return <div>Error loading setup scripts</div>;
+    }
     return (
         <>
             <div>
@@ -29,14 +37,14 @@ const Page: NextPage = async () => {
                 </p>
             </div>
             <div className="mt-8">
-                {scripts.map((script, index) => (
+                {data?.map((script, index) => (
                     <div key={index}>
                         <Link
                             href={`/dashboard/setup-scripts/${script.id}`}
                             className="mb-4 block rounded-lg bg-white p-4 shadow hover:bg-gray-50"
                         >
                             <h3 className="text-lg font-semibold">
-                                {script.name}
+                                {script.title}
                             </h3>
                             <p className="text-sm text-gray-600">
                                 {script.description}

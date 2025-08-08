@@ -48,7 +48,9 @@ const Page: NextPage = () => {
         );
         if (!res.ok) {
             console.error("Login failed:", res.statusText);
-            toast.error("ログインに失敗しました。メールアドレスとパスワードを確認してください。");
+            toast.error(
+                "ログインに失敗しました。メールアドレスとパスワードを確認してください。",
+            );
             return;
         }
         const payload = await res.json();
