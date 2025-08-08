@@ -41,12 +41,6 @@ const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
                     <TableCell>{ip}</TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell className="font-bold">ゲートウェイ</TableCell>
-                    <TableCell>
-                        {process.env.NETWORK_GATEWAY || "192.168.122.1"}
-                    </TableCell>
-                </TableRow>
-                <TableRow>
                     <TableCell className="font-bold">プラン</TableCell>
                     <TableCell>
                         <Tooltip>

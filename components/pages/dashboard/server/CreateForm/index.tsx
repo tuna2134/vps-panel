@@ -25,8 +25,12 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import * as SelectPrimitive from "@radix-ui/react-select";
 import { createServer } from "@/lib/api/server";
 import { getCookie } from "cookies-next/client";
+import { fetchSetupScripts, SetupScript } from "@/lib/api/setup-scripts";
+import useSWR from "swr";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -38,12 +42,35 @@ const formSchema = z.object({
     setupScript: z.string().optional(),
 });
 
-export interface CreateFormProps {
-    // scripts: { id: string; name: string }[];
-}
+const CreateFormSetupScriptSelect: React.FC<React.ComponentProps<typeof SelectPrimitive.Root>> = ({ ...props }) => {
+    const { data, error, isLoading } = useSWR<SetupScript[]>(
+        {},
+        fetchSetupScripts,
+    );
+    if (error) {
+        toast.error(`Failed to fetch setup scripts: ${error.message}`);
+    }
+    if (isLoading) {
+        return <Skeleton className="h-10 w-full" />;
+    }
+    return (
+        <Select {...props}>
+            <SelectTrigger>
+                <SelectValue placeholder="Select setup script" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="none">なし</SelectItem>
+                {data?.map((script) => (
+                    <SelectItem key={script.id} value={script.id}>
+                        {script.title}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+};
 
-const CreateForm: React.FC<CreateFormProps> = () => {
-    const scripts: { id: string; name: string }[] = [];
+const CreateForm: React.FC = () => {
     const [clicked, setClicked] = useState<boolean>(false);
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -64,6 +91,9 @@ const CreateForm: React.FC<CreateFormProps> = () => {
             values.name,
             parseInt(values.type, 10),
             values.password,
+            values.setupScript === "none"
+                ? null
+                : parseInt(values.setupScript as string, 10),
         ).catch((error) => {
             toast.error(`Failed to create server: ${error.message}`);
             setClicked(false);
@@ -190,27 +220,7 @@ const CreateForm: React.FC<CreateFormProps> = () => {
                         <FormItem>
                             <FormLabel>Setup Script (Optional)</FormLabel>
                             <FormControl>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select setup script" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="none">
-                                            なし
-                                        </SelectItem>
-                                        {scripts.map((script) => (
-                                            <SelectItem
-                                                key={script.id}
-                                                value={script.id}
-                                            >
-                                                {script.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectContent>
-                                </Select>
+                                <CreateFormSetupScriptSelect onValueChange={field.onChange} defaultValue={field.value} />
                             </FormControl>
                             <FormDescription>
                                 サーバを作成後に実行するセットアップスクリプトを選んでください。

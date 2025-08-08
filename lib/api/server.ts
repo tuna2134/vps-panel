@@ -54,6 +54,7 @@ export async function createServer(
     name: string,
     plan: Number,
     serverPassword: string,
+    scriptId: number | null,
 ) {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -68,6 +69,7 @@ export async function createServer(
                 name,
                 plan,
                 server_password: serverPassword,
+                scriptId,
             }),
         },
     );
