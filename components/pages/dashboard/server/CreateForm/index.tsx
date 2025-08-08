@@ -42,7 +42,9 @@ const formSchema = z.object({
     setupScript: z.string().optional(),
 });
 
-const CreateFormSetupScriptSelect: React.FC<React.ComponentProps<typeof SelectPrimitive.Root>> = ({ ...props }) => {
+const CreateFormSetupScriptSelect: React.FC<
+    React.ComponentProps<typeof SelectPrimitive.Root>
+> = ({ ...props }) => {
     const { data, error, isLoading } = useSWR<SetupScript[]>(
         {},
         fetchSetupScripts,
@@ -220,7 +222,10 @@ const CreateForm: React.FC = () => {
                         <FormItem>
                             <FormLabel>Setup Script (Optional)</FormLabel>
                             <FormControl>
-                                <CreateFormSetupScriptSelect onValueChange={field.onChange} defaultValue={field.value} />
+                                <CreateFormSetupScriptSelect
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                />
                             </FormControl>
                             <FormDescription>
                                 サーバを作成後に実行するセットアップスクリプトを選んでください。
