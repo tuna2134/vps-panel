@@ -3,10 +3,13 @@ export async function fetchServersByUserId(token: string) {
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${token}`);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/users/@me/servers`, {
-        method: "GET",
-        headers: headers,
-    });
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/users/@me/servers`,
+        {
+            method: "GET",
+            headers: headers,
+        },
+    );
 
     if (!response.ok) {
         throw new Error("Failed to fetch servers");
@@ -23,15 +26,21 @@ export interface Server {
     status: "online" | "offline";
 }
 
-export async function fetchServerById(token: string, serverId: string): Promise<Server> {
+export async function fetchServerById(
+    token: string,
+    serverId: string,
+): Promise<Server> {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${token}`);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}`, {
-        method: "GET",
-        headers: headers,
-    });
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}`,
+        {
+            method: "GET",
+            headers: headers,
+        },
+    );
 
     if (!response.ok) {
         throw new Error("Failed to fetch server");
@@ -50,15 +59,18 @@ export async function createServer(
     headers.append("Content-Type", "application/json");
     headers.append("Authorization", `Bearer ${token}`);
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers`, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({
-            name,
-            plan,
-            server_password: serverPassword,
-        }),
-    });
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers`,
+        {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify({
+                name,
+                plan,
+                server_password: serverPassword,
+            }),
+        },
+    );
 
     if (!response.ok) {
         throw new Error("Failed to create server");
@@ -84,9 +96,12 @@ export interface ServerPlanResponse {
 }
 
 export async function fetchAPI(path: string): Promise<ServerPlanResponse> {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_ENDPOINT}${path}`, {
-        method: "GET",
-    });
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}${path}`,
+        {
+            method: "GET",
+        },
+    );
 
     if (!response.ok) {
         throw new Error("Failed to fetch server plans");

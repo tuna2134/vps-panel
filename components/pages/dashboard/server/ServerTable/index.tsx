@@ -17,14 +17,17 @@ interface Props {
 }
 
 const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
-    const { data, isLoading, error } = useSWR<ServerPlanResponse>("/servers/plans", fetchAPI);
+    const { data, isLoading, error } = useSWR<ServerPlanResponse>(
+        "/servers/plans",
+        fetchAPI,
+    );
     if (isLoading) {
-        return "waiting..."
+        return "waiting...";
     }
     if (error) {
         return <div>Error loading server plans</div>;
     }
-    const plan = data?.plans.find(p => p.id === planId);
+    const plan = data?.plans.find((p) => p.id === planId);
     console.log("ServerTable plans:", data);
     return (
         <Table>
@@ -52,7 +55,9 @@ const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
                                 <div className="flex flex-col">
                                     <span>CPU: {plan?.resources.cpu}コア</span>
                                     <span>
-                                        RAM: {plan?.resources?.memory as number / 1024}
+                                        RAM:{" "}
+                                        {(plan?.resources?.memory as number) /
+                                            1024}
                                         GB
                                     </span>
                                     <span>Disk: {plan?.resources.disk}GB</span>

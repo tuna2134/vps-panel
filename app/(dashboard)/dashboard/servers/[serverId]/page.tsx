@@ -24,8 +24,8 @@ const Page: NextPage<PageProps> = ({ params }) => {
     useEffect(() => {
         const token = getCookie("token") as string;
         fetchServerById(token, serverId)
-            .then(data => {
-                setServerData(data)
+            .then((data) => {
+                setServerData(data);
                 setPlanId(data.plan);
             })
             .catch(() => notFound());
@@ -44,7 +44,11 @@ const Page: NextPage<PageProps> = ({ params }) => {
                     />
                 </div>
                 <div className="mt-18">
-                    <ServerTable ip={serverData?.ip_address as string} planId={planId as number} id={serverId} />
+                    <ServerTable
+                        ip={serverData?.ip_address as string}
+                        planId={planId as number}
+                        id={serverId}
+                    />
                 </div>
             </div>
         </>

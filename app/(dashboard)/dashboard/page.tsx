@@ -28,10 +28,9 @@ const Page: NextPage = () => {
     const [servers, setServers] = React.useState<Server[]>([]);
     React.useEffect(() => {
         const token = getCookie("token") as string;
-        fetchServersByUserId(token)
-            .then((data) => {
-                setServers(data);
-            })
+        fetchServersByUserId(token).then((data) => {
+            setServers(data);
+        });
     }, [setServers]);
     return (
         <>

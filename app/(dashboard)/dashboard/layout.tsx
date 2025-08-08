@@ -18,12 +18,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     useEffect(() => {
         const token = getCookie("token");
         if (token) {
-            getUser(token).then((data) => {
-                setUser(data);
-            }).catch((error) => {
-                console.error("Failed to fetch user:", error);
-                router.push("/sign-in");
-            });
+            getUser(token)
+                .then((data) => {
+                    setUser(data);
+                })
+                .catch((error) => {
+                    console.error("Failed to fetch user:", error);
+                    router.push("/sign-in");
+                });
         }
     }, [setUser]);
     return (
