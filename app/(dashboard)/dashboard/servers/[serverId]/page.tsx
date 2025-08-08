@@ -36,7 +36,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                 <div className="flex items-center justify-between">
                     <ServerDetail
                         serverName={serverData?.name as string}
-                        status={serverData?.status as "online" | "offline"}
+                        status={serverData?.status as "offline" | "offline"}
                     />
                     <Action
                         serverId={serverData?.id as string}
