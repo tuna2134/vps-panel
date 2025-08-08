@@ -18,7 +18,7 @@ import React from "react";
 
 interface Server {
     id: string;
-    type: number;
+    plan: number;
     name: string;
     ip_address: string;
     status: "online" | "offline";
@@ -66,7 +66,7 @@ const Page: NextPage = () => {
                             <ServerTableRow
                                 key={index}
                                 status={server.status}
-                                type={server.type}
+                                type={server.plan}
                                 name={server.name}
                                 ip={server.ip_address}
                                 id={server.id}
