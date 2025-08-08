@@ -36,9 +36,7 @@ export const AppSidebarFooter: React.FC = () => {
                                 <div className="flex items-center space-x-2">
                                     <Avatar>
                                         <AvatarImage
-                                            src={
-                                                data?.avatar_url || undefined
-                                            }
+                                            src={data?.avatar_url || undefined}
                                         />
                                         <AvatarFallback>
                                             {data?.username}

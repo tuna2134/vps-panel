@@ -1,3 +1,4 @@
+"use client";
 import { ServerTableRow } from "@/components/pages/dashboard/main";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,14 +8,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { server } from "@/lib/db/schemas";
-import { eq } from "drizzle-orm";
+import { fetchServersByUserId } from "@/lib/api/server";
+import { getCookie } from "cookies-next/client";
 import { Server } from "iconoir-react";
 import { Plus } from "lucide-react";
 import { NextPage } from "next";
-import { headers } from "next/headers";
 import Link from "next/link";
 import React from "react";
 
@@ -22,45 +20,19 @@ interface Server {
     id: string;
     type: number;
     name: string;
-    ip: string;
-    state: "online" | "offline";
-    createdAt: string;
-    authorId: string;
-    os: string;
+    ip_address: string;
+    status: "online" | "offline";
 }
 
-const Page: NextPage = async () => {
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
-    const servers = await db
-        .select()
-        .from(server)
-        .where(eq(server.authorId, session?.user.id as string));
-    // Queryを生成
-    // running=true&domains=aa,bb,cc
-    const params = new URLSearchParams({
-        running: "true",
-        domains: servers.map((s) => s.id).join(","),
-    }).toString();
-    const res = await fetch(
-        `${process.env.VM_CONTROLLER_ENDPOINT}/domains?${params}`,
-    );
-    // DBとAPIのデータを結合
-    const data = await res.json();
-    const serversWithState: Server[] = servers.map((server) => {
-        if (data?.domains !== null && data?.domains.includes(server.id)) {
-            return {
-                ...server,
-                state: "online",
-            };
-        } else {
-            return {
-                ...server,
-                state: "offline",
-            };
-        }
-    });
+const Page: NextPage = () => {
+    const [servers, setServers] = React.useState<Server[]>([]);
+    React.useEffect(() => {
+        const token = getCookie("token") as string;
+        fetchServersByUserId(token)
+            .then((data) => {
+                setServers(data);
+            })
+    }, [setServers]);
     return (
         <>
             <div className="flex items-center justify-between">
@@ -72,7 +44,7 @@ const Page: NextPage = async () => {
                     </Link>
                 </Button>
             </div>
-            {serversWithState.length === 0 ? (
+            {servers.length === 0 ? (
                 <div className="mt-4">
                     <p>
                         サーバが作成されていないため、ありません。 Add
@@ -91,13 +63,13 @@ const Page: NextPage = async () => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {serversWithState.map((server, index) => (
+                        {servers.map((server, index) => (
                             <ServerTableRow
                                 key={index}
-                                status={server.state}
+                                status={server.status}
                                 type={server.type}
                                 name={server.name}
-                                ip={server.ip}
+                                ip={server.ip_address}
                                 id={server.id}
                             />
                         ))}

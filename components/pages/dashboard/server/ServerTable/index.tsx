@@ -1,28 +1,31 @@
+"use client";
 import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table";
 import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { fetchAPI, ServerPlanResponse } from "@/lib/api/server";
+import useSWR from "swr";
 
 import React from "react";
 
 interface Props {
     ip: string;
-    plan: PropsPlan;
+    planId?: number;
     id: string;
 }
 
-interface PropsPlan {
-    name: string;
-    resource: {
-        cpu: number;
-        memory: number;
-        disk: number;
-    };
-}
-
-const ServerTable: React.FC<Props> = ({ ip, plan, id }) => {
+const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
+    const { data, isLoading, error } = useSWR<ServerPlanResponse>("/servers/plans", fetchAPI);
+    if (isLoading) {
+        return "waiting..."
+    }
+    if (error) {
+        return <div>Error loading server plans</div>;
+    }
+    const plan = data?.plans.find(p => p.id === planId);
+    console.log("ServerTable plans:", data);
     return (
         <Table>
             <TableBody>
@@ -44,15 +47,15 @@ const ServerTable: React.FC<Props> = ({ ip, plan, id }) => {
                     <TableCell className="font-bold">プラン</TableCell>
                     <TableCell>
                         <Tooltip>
-                            <TooltipTrigger>{plan.name}</TooltipTrigger>
+                            <TooltipTrigger>{plan?.name}</TooltipTrigger>
                             <TooltipContent>
                                 <div className="flex flex-col">
-                                    <span>CPU: {plan.resource.cpu}コア</span>
+                                    <span>CPU: {plan?.resources.cpu}コア</span>
                                     <span>
-                                        RAM: {plan.resource.memory / 1024}
+                                        RAM: {plan?.resources?.memory as number / 1024}
                                         GB
                                     </span>
-                                    <span>Disk: {plan.resource.disk}GB</span>
+                                    <span>Disk: {plan?.resources.disk}GB</span>
                                 </div>
                             </TooltipContent>
                         </Tooltip>

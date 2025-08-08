@@ -21,6 +21,7 @@ import {
     InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 interface RegisterAccountFormProps {
     afterTemporaryRegistration: (token: string) => void;
@@ -108,6 +109,7 @@ interface MainRegisterAccountFormProps {
 const MainRegisterAccountForm: React.FC<MainRegisterAccountFormProps> = ({
     token,
 }) => {
+    const router = useRouter();
     const formSchema = z.object({
         code: z.string().min(6, "コードが必須です。"),
         password: z
@@ -142,6 +144,7 @@ const MainRegisterAccountForm: React.FC<MainRegisterAccountFormProps> = ({
         }
         const payload = await res.json();
         setCookie("token", payload.token);
+        router.push("/dashboard");
     };
     return (
         <Form {...form}>

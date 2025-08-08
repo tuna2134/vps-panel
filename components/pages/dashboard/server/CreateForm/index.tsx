@@ -12,7 +12,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Input } from "@/components/ui/input";
-import { createServer } from "./action";
 import { toast } from "sonner";
 import {
     Select,
@@ -26,6 +25,8 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { createServer } from "@/lib/api/server";
+import { getCookie } from "cookies-next/client";
 
 const formSchema = z.object({
     name: z.string().min(1, "Server name is required"),
@@ -38,10 +39,11 @@ const formSchema = z.object({
 });
 
 export interface CreateFormProps {
-    scripts: { id: string; name: string }[];
+    // scripts: { id: string; name: string }[];
 }
 
-const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
+const CreateForm: React.FC<CreateFormProps> = () => {
+    const scripts: { id: string; name: string }[] = [];
     const [clicked, setClicked] = useState<boolean>(false);
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -56,13 +58,17 @@ const CreateForm: React.FC<CreateFormProps> = ({ scripts }) => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         toast("Creating server...");
         setClicked(true);
+        const token = getCookie("token") as string;
         await createServer(
+            token,
             values.name,
-            values.type,
-            values.os,
+            parseInt(values.type, 10),
             values.password,
-            values.setupScript === "none" ? undefined : values.setupScript,
-        );
+        ).catch((error) => {
+            toast.error(`Failed to create server: ${error.message}`);
+            setClicked(false);
+            return;
+        });
         toast.success("Server created successfully!");
         router.push("/dashboard");
     };

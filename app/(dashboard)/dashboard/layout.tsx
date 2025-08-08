@@ -5,25 +5,27 @@ import { getUser } from "@/lib/api/user";
 import { user } from "@/lib/jotai";
 import { getCookie } from "cookies-next/client";
 import { useAtom } from "jotai";
-import useSWR from "swr";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-    const token = getCookie("token") as string;
-    if (!token) {
-        "use server";
-    }
-    const { data, error, isLoading } = useSWR(token, getUser);
-    if (error) {
-        console.error("Error fetching user data:", error);
-        return <div>Error loading user data</div>;
-    }
-    if (isLoading) return <div>Loading...</div>;
+    const router = useRouter();
     const [_, setUser] = useAtom(user);
-    setUser(data);
+    useEffect(() => {
+        const token = getCookie("token");
+        if (token) {
+            getUser(token).then((data) => {
+                setUser(data);
+            }).catch((error) => {
+                console.error("Failed to fetch user:", error);
+                router.push("/sign-in");
+            });
+        }
+    }, [setUser]);
     return (
         <SidebarProvider>
             <AppSidebar />
