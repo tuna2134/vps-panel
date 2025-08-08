@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { setCookie } from "cookies-next/client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 const Page: NextPage = () => {
     const router = useRouter();
@@ -45,6 +46,11 @@ const Page: NextPage = () => {
                 }),
             },
         );
+        if (!res.ok) {
+            console.error("Login failed:", res.statusText);
+            toast.error("ログインに失敗しました。メールアドレスとパスワードを確認してください。");
+            return;
+        }
         const payload = await res.json();
         if (payload.token) {
             setCookie("token", payload.token, { maxAge: 60 * 60 * 24 * 7 }); // 1 week
