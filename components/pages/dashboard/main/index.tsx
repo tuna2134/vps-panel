@@ -12,12 +12,8 @@ import { plans } from "@/data/config.json";
 import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
-import {
-    powerOnServer,
-    restartServer,
-} from "./action";
 import { OnTag, SystemRestart, SystemShut, Terminal } from "iconoir-react";
-import { deleteServer, shutdownServer } from "@/lib/api/server";
+import { deleteServer, powerOnServer, restartServer, shutdownServer } from "@/lib/api/server";
 import { getCookie } from "cookies-next/client";
 
 interface ActionProps {
@@ -50,8 +46,9 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     };
     const handleRestart = async () => {
         toast("Restarting server...");
+        const token = getCookie("token") as string;
         try {
-            await restartServer(serverId);
+            await restartServer(token, serverId);
             toast.success("Server restarted successfully");
         } catch (error) {
             console.error("Error restarting server:", error);
@@ -60,8 +57,9 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     };
     const handlePowerOn = async () => {
         toast("Powering on server...");
+        let token = getCookie("token") as string;
         try {
-            await powerOnServer(serverId);
+            await powerOnServer(token, serverId);
             toast.success("Server powered on successfully");
         } catch (error) {
             console.error("Error powering on server:", error);
