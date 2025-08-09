@@ -1,11 +1,11 @@
-import { auth } from "@/lib/auth";
-import { db } from "@/lib/db";
-import { setupScript } from "@/lib/db/schemas/setupScript";
-import { eq } from "drizzle-orm";
+"use client";
 import { NextPage } from "next";
-import { headers } from "next/headers";
-import { notFound, unauthorized } from "next/navigation";
 import { EditAndDelete } from "@/components/pages/dashboard/SetupScript";
+import { use } from "react";
+import useSWR from "swr";
+import { fetchSetupScript, SetupScript } from "@/lib/api/setup-scripts";
+import { useAtom } from "jotai";
+import { user } from "@/lib/jotai";
 
 interface Params {
     scriptId: string;
@@ -15,21 +15,12 @@ interface PageProps {
     params: Promise<Params>;
 }
 
-const Page: NextPage<PageProps> = async ({ params }) => {
-    const { scriptId } = await params;
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
-    if (!session) {
-        unauthorized();
-    }
-    const script = await db
-        .select()
-        .from(setupScript)
-        .where(eq(setupScript.id, scriptId));
-    if (script.length === 0) {
-        return notFound();
-    }
+const Page: NextPage<PageProps> = ({ params }) => {
+    const { scriptId } = use(params);
+    const { data, isLoading, error} = useSWR<SetupScript>(scriptId, fetchSetupScript);
+    const [userData, _] = useAtom(user);
+    if (isLoading || !data) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
     return (
         <>
             <div className="flex items-center justify-between">
@@ -38,16 +29,16 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                         セットアップスクリプトの詳細
                     </h2>
                     <p className="mt-4">
-                        スクリプト名: {script[0]?.name || "不明"}
+                        スクリプト名: {data.title || "不明"}
                     </p>
                 </div>
-                {script[0]?.authorId === session.user.id && (
+                {data.author_id === userData?.id && (
                     <EditAndDelete scriptId={scriptId} />
                 )}
             </div>
             <div className="mt-8">
                 <pre className="rounded bg-gray-100 p-4">
-                    {script[0]?.script || "スクリプトが見つかりません。"}
+                    {data.script || "スクリプトが見つかりません。"}
                 </pre>
             </div>
         </>

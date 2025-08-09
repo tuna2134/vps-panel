@@ -38,7 +38,7 @@ const ServerListTable = () => {
 
     if (isLoading || !data) {
         return (
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center">
                 <LoaderCircle className="animate-spin" />
             </div>
         );

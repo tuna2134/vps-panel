@@ -2,19 +2,46 @@
 import { Button } from "@/components/ui/button";
 import { fetchSetupScripts } from "@/lib/api/setup-scripts";
 import { Plus } from "iconoir-react";
+import { LoaderCircle } from "lucide-react";
 import { NextPage } from "next";
 import Link from "next/link";
+import React from "react";
 import useSWR from "swr";
 
-const Page: NextPage = () => {
+const SetupScriptList: React.FC = () => {
     const { data, isLoading, error } = useSWR({}, fetchSetupScripts);
-    console.log(data);
-    if (isLoading) {
-        return <div>Loading...</div>;
+    if (isLoading || !data) {
+        return (
+            <div className="flex h-full w-full items-center justify-center">
+                <LoaderCircle className="animate-spin" />
+            </div>
+        );
     }
     if (error) {
         return <div>Error loading setup scripts</div>;
     }
+    return (
+        <>
+            {data.map((script, index) => (
+                <div key={index}>
+                    <Link
+                        href={`/dashboard/setup-scripts/${script.id}`}
+                        className="mb-4 block rounded-lg bg-white p-4 shadow hover:bg-gray-50"
+                    >
+                        <h3 className="text-lg font-semibold">
+                            {script.title}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                            {script.description}
+                        </p>
+                    </Link>
+                </div>
+            ))}
+        </>
+    );
+};
+
+const Page: NextPage = () => {
     return (
         <>
             <div>
@@ -37,21 +64,7 @@ const Page: NextPage = () => {
                 </p>
             </div>
             <div className="mt-8">
-                {data?.map((script, index) => (
-                    <div key={index}>
-                        <Link
-                            href={`/dashboard/setup-scripts/${script.id}`}
-                            className="mb-4 block rounded-lg bg-white p-4 shadow hover:bg-gray-50"
-                        >
-                            <h3 className="text-lg font-semibold">
-                                {script.title}
-                            </h3>
-                            <p className="text-sm text-gray-600">
-                                {script.description}
-                            </p>
-                        </Link>
-                    </div>
-                ))}
+                <SetupScriptList />
             </div>
         </>
     );
@@ -59,4 +72,3 @@ const Page: NextPage = () => {
 
 export default Page;
 
-export const dynamic = "force-dynamic";
