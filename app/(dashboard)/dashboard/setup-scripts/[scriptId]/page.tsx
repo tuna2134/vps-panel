@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { fetchSetupScript, SetupScript } from "@/lib/api/setup-scripts";
 import { useAtom } from "jotai";
 import { user } from "@/lib/jotai";
+import { LoaderCircle } from "lucide-react";
 
 interface Params {
     scriptId: string;
@@ -19,7 +20,13 @@ const Page: NextPage<PageProps> = ({ params }) => {
     const { scriptId } = use(params);
     const { data, isLoading, error} = useSWR<SetupScript>(scriptId, fetchSetupScript);
     const [userData, _] = useAtom(user);
-    if (isLoading || !data) return <div>Loading...</div>;
+    if (isLoading || !data) {
+        return (
+            <div className="flex h-full w-full items-center justify-center">
+                <LoaderCircle className="animate-spin" />
+            </div>
+        );
+    }
     if (error) return <div>Error: {error.message}</div>;
     return (
         <>
