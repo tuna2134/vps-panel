@@ -164,7 +164,7 @@ export async function powerOnServer(token: string, serverId: string) {
 
 export async function restartServer(token: string, serverId: string) {
     const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}/power_on`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}/restart`,
         {
             method: "POST",
             headers: {
