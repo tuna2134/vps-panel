@@ -1,4 +1,6 @@
 import { getCookie } from "cookies-next/client";
+import { z } from "zod";
+import { setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
 
 export interface SetupScript {
     id: string;
@@ -46,4 +48,23 @@ export async function fetchSetupScript(scriptId: string): Promise<SetupScript> {
     }
 
     return response.json();
+}
+
+export async function putSetupScript(scriptId: string, data: z.infer<typeof setupScriptFormSchema>): Promise<SetupScript> {
+    const token = getCookie("token") as string;
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/setup-scripts/${scriptId}`,
+        {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        },
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to update setup script");
+    }
 }

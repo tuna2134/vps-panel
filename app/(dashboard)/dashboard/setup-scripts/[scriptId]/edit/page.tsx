@@ -1,12 +1,11 @@
+"use client";
 import { NextPage } from "next";
-import { editSetupScript } from "./action";
-import { SetupScriptEditPage } from "@/components/pages/dashboard/SetupScript/Form";
-import { db } from "@/lib/db";
-import { setupScript } from "@/lib/db/schemas/setupScript";
-import { and, eq } from "drizzle-orm";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
-import { notFound, unauthorized } from "next/navigation";
+import { SetupScriptEditPage, setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
+import { use } from "react";
+import useSWR from "swr";
+import { fetchSetupScript, putSetupScript, SetupScript } from "@/lib/api/setup-scripts";
+import { LoaderCircle } from "lucide-react";
+import { z } from "zod";
 
 interface Params {
     scriptId: string;
@@ -16,27 +15,22 @@ interface PageProps {
     params: Promise<Params>;
 }
 
-const Page: NextPage<PageProps> = async ({ params }) => {
-    const { scriptId } = await params;
-    const session = await auth.api.getSession({
-        headers: await headers(),
-    });
-
-    if (!session?.user) {
-        unauthorized();
-    }
-
-    const data = await db
-        .select()
-        .from(setupScript)
-        .where(
-            and(
-                eq(setupScript.id, scriptId),
-                eq(setupScript.authorId, session?.user.id as string),
-            ),
+const Page: NextPage<PageProps> = ({ params }) => {
+    const { scriptId } = use(params);
+    const { data, isLoading, error} = useSWR<SetupScript>(scriptId, fetchSetupScript);
+    if (isLoading || !data) {
+        return (
+            <div className="flex h-full w-full items-center justify-center">
+                <LoaderCircle className="animate-spin" />
+            </div>
         );
-    if (data.length === 0) {
-        notFound();
+    }
+    if (error) return <div>Error: {error.message}</div>;
+    async function editSetupScript(
+        data: z.infer<typeof setupScriptFormSchema>,
+        scriptId?: string,
+    ) {
+        await putSetupScript(scriptId || "", data);
     }
 
     return (
@@ -51,9 +45,9 @@ const Page: NextPage<PageProps> = async ({ params }) => {
                 buttonName="スクリプトを更新する"
                 scriptId={scriptId}
                 defaultData={{
-                    name: data[0]?.name || "",
-                    description: data[0]?.description || "",
-                    script: data[0]?.script || "",
+                    title: data.title || "",
+                    description: data.description || "",
+                    script: data.script || "",
                 }}
             />
         </>
