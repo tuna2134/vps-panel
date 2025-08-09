@@ -18,7 +18,10 @@ interface PageProps {
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const { scriptId } = use(params);
-    const { data, isLoading, error} = useSWR<SetupScript>(scriptId, fetchSetupScript);
+    const { data, isLoading, error } = useSWR<SetupScript>(
+        scriptId,
+        fetchSetupScript,
+    );
     const [userData, _] = useAtom(user);
     if (isLoading || !data) {
         return (
@@ -35,9 +38,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                     <h2 className="text-2xl font-bold tracking-wider">
                         セットアップスクリプトの詳細
                     </h2>
-                    <p className="mt-4">
-                        スクリプト名: {data.title || "不明"}
-                    </p>
+                    <p className="mt-4">スクリプト名: {data.title || "不明"}</p>
                 </div>
                 {data.author_id === userData?.id && (
                     <EditAndDelete scriptId={scriptId} />

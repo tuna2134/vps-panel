@@ -50,7 +50,10 @@ export async function fetchSetupScript(scriptId: string): Promise<SetupScript> {
     return response.json();
 }
 
-export async function putSetupScript(scriptId: string, data: z.infer<typeof setupScriptFormSchema>): Promise<SetupScript> {
+export async function putSetupScript(
+    scriptId: string,
+    data: z.infer<typeof setupScriptFormSchema>,
+): Promise<SetupScript> {
     const token = getCookie("token") as string;
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/setup-scripts/${scriptId}`,

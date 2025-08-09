@@ -1,9 +1,16 @@
 "use client";
 import { NextPage } from "next";
-import { SetupScriptEditPage, setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
+import {
+    SetupScriptEditPage,
+    setupScriptFormSchema,
+} from "@/components/pages/dashboard/SetupScript/Form";
 import { use } from "react";
 import useSWR from "swr";
-import { fetchSetupScript, putSetupScript, SetupScript } from "@/lib/api/setup-scripts";
+import {
+    fetchSetupScript,
+    putSetupScript,
+    SetupScript,
+} from "@/lib/api/setup-scripts";
 import { LoaderCircle } from "lucide-react";
 import { z } from "zod";
 
@@ -17,7 +24,10 @@ interface PageProps {
 
 const Page: NextPage<PageProps> = ({ params }) => {
     const { scriptId } = use(params);
-    const { data, isLoading, error} = useSWR<SetupScript>(scriptId, fetchSetupScript);
+    const { data, isLoading, error } = useSWR<SetupScript>(
+        scriptId,
+        fetchSetupScript,
+    );
     if (isLoading || !data) {
         return (
             <div className="flex h-full w-full items-center justify-center">
