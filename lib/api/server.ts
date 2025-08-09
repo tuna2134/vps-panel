@@ -120,9 +120,9 @@ export async function deleteServer(token: string, serverId: string) {
         {
             method: "DELETE",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
-        }
+        },
     );
 
     if (!response.ok) {
@@ -136,9 +136,9 @@ export async function shutdownServer(token: string, serverId: string) {
         {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
-        }
+        },
     );
 
     if (!response.ok) {
@@ -152,9 +152,9 @@ export async function powerOnServer(token: string, serverId: string) {
         {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
-        }
+        },
     );
 
     if (!response.ok) {
@@ -168,9 +168,9 @@ export async function restartServer(token: string, serverId: string) {
         {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
-        }
+        },
     );
 
     if (!response.ok) {

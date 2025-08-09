@@ -13,7 +13,12 @@ import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 import { OnTag, SystemRestart, SystemShut, Terminal } from "iconoir-react";
-import { deleteServer, powerOnServer, restartServer, shutdownServer } from "@/lib/api/server";
+import {
+    deleteServer,
+    powerOnServer,
+    restartServer,
+    shutdownServer,
+} from "@/lib/api/server";
 import { getCookie } from "cookies-next/client";
 
 interface ActionProps {
