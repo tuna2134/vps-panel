@@ -113,3 +113,35 @@ export async function fetchAPI(path: string): Promise<ServerPlanResponse> {
 
     return response.json();
 }
+
+export async function deleteServer(token: string, serverId: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to delete server");
+    }
+}
+
+export async function shutdownServer(token: string, serverId: string) {
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/${serverId}/shutdown`,
+        {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+            },
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to shutdown server");
+    }
+}

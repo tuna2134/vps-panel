@@ -13,12 +13,12 @@ import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 import {
-    deleteServer,
     powerOnServer,
     restartServer,
-    shutdownServer,
 } from "./action";
 import { OnTag, SystemRestart, SystemShut, Terminal } from "iconoir-react";
+import { deleteServer, shutdownServer } from "@/lib/api/server";
+import { getCookie } from "cookies-next/client";
 
 interface ActionProps {
     serverId: string;
@@ -28,8 +28,9 @@ interface ActionProps {
 export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     const handleDelete = async () => {
         toast("Deleting server...");
+        const token = getCookie("token") as string;
         try {
-            await deleteServer(serverId);
+            await deleteServer(token, serverId);
             toast.success("Server deleted successfully");
         } catch (error) {
             console.error("Error deleting server:", error);
@@ -38,8 +39,9 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     };
     const handleShutdown = async () => {
         toast("Shutting down server...");
+        const token = getCookie("token") as string;
         try {
-            await shutdownServer(serverId);
+            await shutdownServer(token, serverId);
             toast.success("Server shutdown successfully");
         } catch (error) {
             console.error("Error shutting down server:", error);
