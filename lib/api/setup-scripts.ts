@@ -87,7 +87,6 @@ export async function deleteScript(scriptId: string): Promise<void> {
     );
 
     if (!response.ok) {
-        toast.error("Failed to delete setup script");
         throw new Error("Failed to delete setup script");
     }
 }

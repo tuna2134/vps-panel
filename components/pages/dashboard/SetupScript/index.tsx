@@ -21,7 +21,9 @@ export const EditAndDelete: React.FC<EditAndDeleteProps> = ({ scriptId }) => {
 
     const handleDelete = async () => {
         toast("Deleting script...");
-        await deleteScript(scriptId);
+        await deleteScript(scriptId).catch((error) => {
+            toast.error(`Failed to delete script: ${error.message}`);
+        });
         toast.success("Script deleted successfully");
         router.push("/dashboard/setup-scripts");
     };
