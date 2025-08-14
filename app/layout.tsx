@@ -20,11 +20,6 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-    title: "StuVPS",
-    description: "学生による学生のための学生のVPS",
-};
-
 export default function RootLayout({
     children,
 }: Readonly<{
