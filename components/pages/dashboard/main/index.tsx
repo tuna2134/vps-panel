@@ -62,7 +62,7 @@ export const Action: React.FC<ActionProps> = ({ serverId, online }) => {
     };
     const handlePowerOn = async () => {
         toast("Powering on server...");
-        let token = getCookie("token") as string;
+        const token = getCookie("token") as string;
         try {
             await powerOnServer(token, serverId);
             toast.success("Server powered on successfully");
