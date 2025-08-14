@@ -26,20 +26,20 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     const router = useRouter();
-        const [_, setUser] = useAtom(user);
-        useEffect(() => {
-            const token = getCookie("token");
-            if (token) {
-                getUser(token)
-                    .then((data) => {
-                        setUser(data);
-                    })
-                    .catch((error) => {
-                        console.error("Failed to fetch user:", error);
-                        router.push("/sign-in");
-                    });
-            }
-        }, [setUser]);
+    const [_, setUser] = useAtom(user);
+    useEffect(() => {
+        const token = getCookie("token");
+        if (token) {
+            getUser(token)
+                .then((data) => {
+                    setUser(data);
+                })
+                .catch((error) => {
+                    console.error("Failed to fetch user:", error);
+                    router.push("/sign-in");
+                });
+        }
+    }, [setUser]);
     return (
         <html lang="ja">
             <body
