@@ -57,6 +57,9 @@ const RegisterAccountForm: React.FC<RegisterAccountFormProps> = ({
                 }),
             },
         );
+        if (!res.ok) {
+            throw new Error("Failed to register account");
+        }
         const payload = await res.json();
         afterTemporaryRegistration(payload.token);
     };
