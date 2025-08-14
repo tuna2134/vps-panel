@@ -52,7 +52,7 @@ export async function fetchServerById(
 export async function createServer(
     token: string,
     name: string,
-    plan: Number,
+    plan: number,
     serverPassword: string,
     scriptId: number | null,
 ) {
