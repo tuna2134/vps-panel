@@ -29,7 +29,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                 setPlanId(data.plan);
             })
             .catch(() => notFound());
-    }, [serverId, setServerData, serverId]);
+    }, [serverId, setServerData]);
     return (
         <>
             <div>

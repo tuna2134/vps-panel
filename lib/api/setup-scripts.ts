@@ -1,7 +1,6 @@
 import { getCookie } from "cookies-next/client";
 import { z } from "zod";
 import { setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
-import { toast } from "sonner";
 
 export interface SetupScript {
     id: string;
