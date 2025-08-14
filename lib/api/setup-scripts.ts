@@ -1,6 +1,7 @@
 import { getCookie } from "cookies-next/client";
 import { z } from "zod";
 import { setupScriptFormSchema } from "@/components/pages/dashboard/SetupScript/Form";
+import { toast } from "sonner";
 
 export interface SetupScript {
     id: string;
@@ -53,7 +54,7 @@ export async function fetchSetupScript(scriptId: string): Promise<SetupScript> {
 export async function putSetupScript(
     scriptId: string,
     data: z.infer<typeof setupScriptFormSchema>,
-): Promise<SetupScript> {
+): Promise<void> {
     const token = getCookie("token") as string;
     const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_ENDPOINT}/setup-scripts/${scriptId}`,
@@ -69,5 +70,24 @@ export async function putSetupScript(
 
     if (!response.ok) {
         throw new Error("Failed to update setup script");
+    }
+}
+
+export async function deleteScript(scriptId: string): Promise<void> {
+    const token = getCookie("token") as string;
+    const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/setup-scripts/${scriptId}`,
+        {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        },
+    );
+
+    if (!response.ok) {
+        toast.error("Failed to delete setup script");
+        throw new Error("Failed to delete setup script");
     }
 }

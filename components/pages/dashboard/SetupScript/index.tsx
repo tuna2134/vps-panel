@@ -8,9 +8,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bin, Edit, MoreVert } from "iconoir-react";
 import { toast } from "sonner";
-import { deleteScript } from "./action";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { deleteScript } from "@/lib/api/setup-scripts";
 
 interface EditAndDeleteProps {
     scriptId: string;
@@ -21,13 +21,9 @@ export const EditAndDelete: React.FC<EditAndDeleteProps> = ({ scriptId }) => {
 
     const handleDelete = async () => {
         toast("Deleting script...");
-        const res = await deleteScript(scriptId);
-        if (res.success) {
-            toast.success("Script deleted successfully");
-            router.push("/dashboard/setup-scripts");
-        } else {
-            toast.error(res.error || "Failed to delete script");
-        }
+        await deleteScript(scriptId);
+        toast.success("Script deleted successfully");
+        router.push("/dashboard/setup-scripts");
     };
 
     return (
