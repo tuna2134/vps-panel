@@ -33,6 +33,7 @@ const RegisterAccountForm: React.FC<RegisterAccountFormProps> = ({
     const formSchema = z.object({
         username: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email address"),
+        register_passcode: z.string().min(6, "Passcode must be at least 6 characters long"),
     });
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -52,6 +53,7 @@ const RegisterAccountForm: React.FC<RegisterAccountFormProps> = ({
                 body: JSON.stringify({
                     username: data.username,
                     email: data.email,
+                    register_passcode: data.register_passcode,
                 }),
             },
         );
@@ -91,6 +93,19 @@ const RegisterAccountForm: React.FC<RegisterAccountFormProps> = ({
                                     placeholder="taro@example.com"
                                     {...field}
                                 />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="register_passcode"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>登録パスコード</FormLabel>
+                            <FormControl>
+                                <Input placeholder="himitsu-dayo ♡" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
