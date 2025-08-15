@@ -123,8 +123,14 @@ const Page: NextPage = () => {
                             <Button type="submit">ログイン</Button>
                         </motion.form>
                     </Form>
-                    <Button variant="link" className="text-center mt-6 w-full" asChild>
-                        <Link href="/register-account">アカウントをお持ちでない方はこちら</Link>
+                    <Button
+                        variant="link"
+                        className="mt-6 w-full text-center"
+                        asChild
+                    >
+                        <Link href="/register-account">
+                            アカウントをお持ちでない方はこちら
+                        </Link>
                     </Button>
                 </div>
             </div>

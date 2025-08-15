@@ -261,8 +261,14 @@ const Page: NextPage = () => {
                             token={tokenForRegistration as string}
                         />
                     )}
-                    <Button variant="link" className="text-center mt-6 w-full" asChild>
-                        <Link href="/sign-in">アカウントをお持ちの方はこちら</Link>
+                    <Button
+                        variant="link"
+                        className="mt-6 w-full text-center"
+                        asChild
+                    >
+                        <Link href="/sign-in">
+                            アカウントをお持ちの方はこちら
+                        </Link>
                     </Button>
                 </div>
             </div>
