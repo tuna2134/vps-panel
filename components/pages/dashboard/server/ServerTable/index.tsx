@@ -5,7 +5,7 @@ import {
     TooltipContent,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { fetchAPI, ServerPlanResponse } from "@/lib/api/server";
+import { fetchPlanList, ServerPlan } from "@/lib/api/server";
 import useSWR from "swr";
 
 import React from "react";
@@ -17,9 +17,9 @@ interface Props {
 }
 
 const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
-    const { data, isLoading, error } = useSWR<ServerPlanResponse>(
-        "/servers/plans",
-        fetchAPI,
+    const { data, isLoading, error } = useSWR<ServerPlan[]>(
+        {},
+        fetchPlanList,
     );
     if (isLoading) {
         return "waiting...";
@@ -27,7 +27,7 @@ const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
     if (error) {
         return <div>Error loading server plans</div>;
     }
-    const plan = data?.plans.find((p) => p.id === planId);
+    const plan = data?.find((p) => p.id === planId);
     console.log("ServerTable plans:", data);
     return (
         <Table>

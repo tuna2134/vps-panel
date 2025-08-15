@@ -97,9 +97,9 @@ export interface ServerPlanResponse {
     plans: ServerPlan[];
 }
 
-export async function fetchAPI(path: string): Promise<ServerPlanResponse> {
+export async function fetchPlanList(path: string): Promise<ServerPlan[]> {
     const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ENDPOINT}${path}`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/plans`,
         {
             method: "GET",
         },
@@ -109,9 +109,9 @@ export async function fetchAPI(path: string): Promise<ServerPlanResponse> {
         throw new Error("Failed to fetch server plans");
     }
 
-    console.log("fetchAPI response:", response);
+    const data: ServerPlanResponse = await response.json();
 
-    return response.json();
+    return data.plans;
 }
 
 export async function deleteServer(token: string, serverId: string) {

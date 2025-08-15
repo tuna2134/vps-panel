@@ -26,7 +26,7 @@ import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { createServer } from "@/lib/api/server";
+import { createServer, fetchPlanList, ServerPlan } from "@/lib/api/server";
 import { getCookie } from "cookies-next/client";
 import { fetchSetupScripts, SetupScript } from "@/lib/api/setup-scripts";
 import useSWR from "swr";
@@ -65,6 +65,36 @@ const CreateFormSetupScriptSelect: React.FC<
                 {data?.map((script) => (
                     <SelectItem key={script.id} value={script.id}>
                         {script.title}
+                    </SelectItem>
+                ))}
+            </SelectContent>
+        </Select>
+    );
+};
+
+const CreateFormPlanSelect: React.FC<
+    React.ComponentProps<typeof SelectPrimitive.Root>
+> = ({ ...props }) => {
+    const { data, error, isLoading } = useSWR<ServerPlan[]>(
+        {},
+        fetchPlanList,
+    );
+    if (error) {
+        toast.error(`Failed to fetch server plans: ${error.message}`);
+    }
+    if (isLoading) {
+        return <Skeleton className="h-10 w-full" />;
+    }
+    return (
+        <Select {...props}>
+            <SelectTrigger>
+                <SelectValue placeholder="Select setup script" />
+            </SelectTrigger>
+            <SelectContent>
+                <SelectItem value="none">なし</SelectItem>
+                {data?.map((plan) => (
+                    <SelectItem key={plan.id} value={plan.id.toString()}>
+                        {`${plan.name} ${plan.resources.cpu}core ${plan.resources.memory / 1024}G ${plan.resources.disk}GiB`}
                     </SelectItem>
                 ))}
             </SelectContent>
@@ -135,26 +165,10 @@ const CreateForm: React.FC = () => {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Server Type</FormLabel>
-                            <Select
+                            <CreateFormPlanSelect
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
-                            >
-                                <FormControl>
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="サーバのタイプを選んでください。" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    {plans.map((plan, index) => (
-                                        <SelectItem
-                                            key={index}
-                                            value={plan.id.toString()}
-                                        >
-                                            {`${plan.name} ${plan.resource.cpu}core ${plan.resource.memory / 1024}G ${plan.resource.disk}GiB`}
-                                        </SelectItem>
-                                    ))}
-                                </SelectContent>
-                            </Select>
+                            />
                             <FormDescription>
                                 サーバのディスク、メモリ、CPUなどを選択してください。
                             </FormDescription>
