@@ -85,7 +85,7 @@ const CreateFormPlanSelect: React.FC<
     return (
         <Select {...props}>
             <SelectTrigger>
-                <SelectValue placeholder="Select setup script" />
+                <SelectValue placeholder="プランを選択してください。" />
             </SelectTrigger>
             <SelectContent>
                 <SelectItem value="none">なし</SelectItem>
