@@ -99,7 +99,7 @@ export interface ServerPlanResponse {
 
 export async function fetchPlanList(path: string): Promise<ServerPlan[]> {
     const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/plans`,
+        `${process.env.NEXT_PUBLIC_API_ENDPOINT}/servers/plans`,
         {
             method: "GET",
         },
