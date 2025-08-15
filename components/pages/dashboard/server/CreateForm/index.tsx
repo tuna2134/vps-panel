@@ -75,10 +75,7 @@ const CreateFormSetupScriptSelect: React.FC<
 const CreateFormPlanSelect: React.FC<
     React.ComponentProps<typeof SelectPrimitive.Root>
 > = ({ ...props }) => {
-    const { data, error, isLoading } = useSWR<ServerPlan[]>(
-        {},
-        fetchPlanList,
-    );
+    const { data, error, isLoading } = useSWR<ServerPlan[]>({}, fetchPlanList);
     if (error) {
         toast.error(`Failed to fetch server plans: ${error.message}`);
     }
