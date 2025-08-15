@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/input-otp";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface RegisterAccountFormProps {
     afterTemporaryRegistration: (token: string) => void;
@@ -260,6 +261,9 @@ const Page: NextPage = () => {
                             token={tokenForRegistration as string}
                         />
                     )}
+                    <Button variant="link" className="text-center mt-6 w-full" asChild>
+                        <Link href="/sign-in">アカウントをお持ちの方はこちら</Link>
+                    </Button>
                 </div>
             </div>
         </div>

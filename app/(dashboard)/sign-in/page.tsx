@@ -17,6 +17,7 @@ import { setCookie } from "cookies-next/client";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const Page: NextPage = () => {
     const router = useRouter();
@@ -122,6 +123,9 @@ const Page: NextPage = () => {
                             <Button type="submit">ログイン</Button>
                         </motion.form>
                     </Form>
+                    <Button variant="link" className="text-center mt-6 w-full" asChild>
+                        <Link href="/register-account">アカウントをお持ちでない方はこちら</Link>
+                    </Button>
                 </div>
             </div>
         </div>
