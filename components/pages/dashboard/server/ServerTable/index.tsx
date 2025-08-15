@@ -17,10 +17,7 @@ interface Props {
 }
 
 const ServerTable: React.FC<Props> = ({ ip, planId, id }) => {
-    const { data, isLoading, error } = useSWR<ServerPlan[]>(
-        {},
-        fetchPlanList,
-    );
+    const { data, isLoading, error } = useSWR<ServerPlan[]>({}, fetchPlanList);
     if (isLoading) {
         return "waiting...";
     }

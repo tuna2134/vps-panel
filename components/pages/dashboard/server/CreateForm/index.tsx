@@ -20,7 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { plans, oses } from "@/data/config.json";
+import { oses } from "@/data/config.json";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
