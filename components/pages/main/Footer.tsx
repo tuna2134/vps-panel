@@ -1,3 +1,4 @@
+import { Discord, X } from "iconoir-react";
 import Link from "next/link";
 
 const Footer: React.FC = () => {
@@ -23,19 +24,13 @@ const Footer: React.FC = () => {
                                 Dashboard
                             </Link>
                         </div>
-                        <div>
-                            <p>
-                                この活動は様々な組織による支援の下成り立っています。
-                                <br />
-                                詳細は
-                                <Link
-                                    href="/supporter"
-                                    className="border-b text-sm"
-                                >
-                                    支援者一覧
-                                </Link>
-                                をご覧ください。
-                            </p>
+                        <div className="flex space-x-6">
+                            <Link href="https://discord.gg/tzm8FTsxZs">
+                                <Discord className="text-xl" />
+                            </Link>
+                            <Link href="https://x.com/proj_stuvps">
+                                <X className="text-xl" />
+                            </Link>
                         </div>
                     </div>
                     <p className="mt-6 text-center text-sm">
