@@ -1,12 +1,23 @@
 "use client";
 import AppSidebar from "@/components/pages/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { user } from "@/lib/jotai";
+import { useAtom } from "jotai";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 interface LayoutProps {
     children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const router = useRouter();
+    const [session, _] = useAtom(user);
+    useEffect(() => {
+        if (!session) {
+            router.push("/sign-in");
+        }
+    }, [session]);
     return (
         <SidebarProvider>
             <AppSidebar />
