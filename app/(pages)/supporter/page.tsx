@@ -17,7 +17,7 @@ const Page: NextPage = () => {
                 <SupporterCard
                     title={"IPA ICSCoE CyberLab"}
                     image={"/images/no_image_yoko.jpg"}
-                    website={"https://ipa.go.jp/"}
+                    website={"https://www.ipa.go.jp/"}
                 />
                 <SupporterCard isPrepare />
                 <SupporterCard
