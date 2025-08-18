@@ -1,7 +1,7 @@
 "use client";
 import AppSidebar from "@/components/pages/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { user } from "@/lib/jotai";
+import { user, UserData } from "@/lib/jotai";
 import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -12,12 +12,12 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const router = useRouter();
-    const { isLoading, user } = useAtomValue<UserData>(user);
+    const { isLoading, user: userData } = useAtomValue<UserData>(user);
     useEffect(() => {
         if (isLoading) {
             return;
         }
-        if (!user) {
+        if (!userData) {
             router.push("/sign-in");
         }
     }, [isLoading, router]);

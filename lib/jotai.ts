@@ -7,7 +7,7 @@ interface User {
     email?: string;
 }
 
-interface UserData {
+export interface UserData {
     user: User | null;
     isLoading: boolean;
 }
