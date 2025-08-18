@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         if (!session.user) {
             router.push("/sign-in");
         }
-    }, [session, router]);
+    }, [session.isLoading, router]);
     return (
         <SidebarProvider>
             <AppSidebar />
