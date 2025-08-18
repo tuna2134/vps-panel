@@ -4,15 +4,13 @@ import { ReactNode, useEffect } from "react";
 import { getUser } from "@/lib/api/user";
 import { user } from "@/lib/jotai";
 import { getCookie } from "cookies-next/client";
-import { useAtom, useSetAtom } from "jotai";
-import { useRouter } from "next/navigation";
+import { useSetAtom } from "jotai";
 
 interface LayoutProps {
     children: ReactNode;
 }
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
-    const router = useRouter();
     const setUser = useSetAtom(user);
     useEffect(() => {
         const token = getCookie("token");
@@ -26,8 +24,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 })
                 .catch((error) => {
                     console.error("Failed to fetch user:", error);
-                    router.push("/sign-in");
+                    setUser({ user: null, isLoading: false });
                 });
+        } else {
+            setUser({ user: null, isLoading: false });
         }
     }, [setUser]);
     return <>{children}</>;
