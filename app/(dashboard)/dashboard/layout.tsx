@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         if (!userData) {
             router.push("/sign-in");
         }
-    }, [isLoading]);
+    }, [isLoading, userData, router]);
     return (
         <SidebarProvider>
             <AppSidebar />
