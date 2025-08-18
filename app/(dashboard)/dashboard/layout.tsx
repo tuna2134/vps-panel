@@ -12,15 +12,15 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const router = useRouter();
-    const session = useAtomValue(user);
+    const { isLoading, user } = useAtomValue<UserData>(user);
     useEffect(() => {
-        if (session.isLoading) {
+        if (isLoading) {
             return;
         }
-        if (!session.user) {
+        if (!user) {
             router.push("/sign-in");
         }
-    }, [session.isLoading, router]);
+    }, [isLoading, router]);
     return (
         <SidebarProvider>
             <AppSidebar />
