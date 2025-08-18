@@ -18,9 +18,13 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Link from "next/link";
+import { getUser } from "@/lib/api/user";
+import { useSetAtom } from "jotai";
+import { user } from "@/lib/jotai";
 
 const Page: NextPage = () => {
     const router = useRouter();
+    const setUser = useSetAtom(user);
     const formSchema = z.object({
         email: z.string().email("Invalid email address"),
         password: z.string(),
@@ -57,6 +61,11 @@ const Page: NextPage = () => {
         const payload = await res.json();
         if (payload.token) {
             setCookie("token", payload.token, { maxAge: 60 * 60 * 24 * 7 }); // 1 week
+            const data = await getUser(payload.token);
+            setUser({
+                user: data,
+                isLoading: false,
+            });
             router.push("/dashboard");
         }
     };

@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const router = useRouter();
     const { isLoading, user: userData } = useAtomValue<UserData>(user);
     useEffect(() => {
-        console.log(isLoading)
+        console.log(isLoading);
         if (isLoading) {
             return;
         }

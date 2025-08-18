@@ -23,6 +23,9 @@ import {
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { getUser } from "@/lib/api/user";
+import { useSetAtom } from "jotai";
+import { user } from "@/lib/jotai";
 
 interface RegisterAccountFormProps {
     afterTemporaryRegistration: (token: string) => void;
@@ -134,6 +137,7 @@ const MainRegisterAccountForm: React.FC<MainRegisterAccountFormProps> = ({
     token,
 }) => {
     const router = useRouter();
+    const setUser = useSetAtom(user);
     const formSchema = z.object({
         code: z.string().min(6, "コードが必須です。"),
         password: z
@@ -168,6 +172,11 @@ const MainRegisterAccountForm: React.FC<MainRegisterAccountFormProps> = ({
         }
         const payload = await res.json();
         setCookie("token", payload.token);
+        const userData = await getUser(payload.token);
+        setUser({
+            user: userData,
+            isLoading: false,
+        });
         router.push("/dashboard");
     };
     return (
