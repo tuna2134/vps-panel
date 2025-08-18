@@ -14,5 +14,5 @@ interface UserData {
 
 export const user = atom<UserData>({
     user: null,
-    isLoading: false,
+    isLoading: true,
 });
