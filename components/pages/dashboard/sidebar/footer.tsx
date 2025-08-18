@@ -21,7 +21,7 @@ import { deleteCookie } from "cookies-next/client";
 
 export const AppSidebarFooter: React.FC = () => {
     const router = useRouter();
-    const [data, _] = useAtom(user);
+    const [session, _] = useAtom(user);
     const handleSignOut = () => {
         deleteCookie("token");
         router.push("/sign-in");
@@ -36,13 +36,13 @@ export const AppSidebarFooter: React.FC = () => {
                                 <div className="flex items-center space-x-2">
                                     <Avatar>
                                         <AvatarImage
-                                            src={data?.avatar_url || undefined}
+                                            src={session.user?.avatar_url || undefined}
                                         />
                                         <AvatarFallback>
-                                            {data?.username}
+                                            {session.user?.username}
                                         </AvatarFallback>
                                     </Avatar>
-                                    <p>{data?.username}</p>
+                                    <p>{session.user?.username}</p>
                                 </div>
                                 <ChevronUp className="ml-auto"></ChevronUp>
                             </SidebarMenuButton>

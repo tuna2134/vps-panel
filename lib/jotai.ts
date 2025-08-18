@@ -7,4 +7,12 @@ interface User {
     email?: string;
 }
 
-export const user = atom<User | null>(null);
+interface UserData {
+    user: User | null;
+    isLoading: boolean;
+}
+
+export const user = atom<UserData>({
+    user: null,
+    isLoading: false,
+});

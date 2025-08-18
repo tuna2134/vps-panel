@@ -6,7 +6,7 @@ import { useAtom } from "jotai";
 import { user } from "@/lib/jotai";
 
 const Header: React.FC = () => {
-    const [data, _] = useAtom(user);
+    const [session, _] = useAtom(user);
     return (
         <header className="flex h-16 w-full items-center border-b">
             <div className="mx-auto flex w-full max-w-3xl items-center justify-between px-4">
@@ -18,15 +18,15 @@ const Header: React.FC = () => {
                     <Link href="/supporter">Supporter</Link>
                 </div>
                 <div>
-                    {data ? (
+                    {session.user ? (
                         <Link href="/dashboard" className="flex items-center">
                             <Avatar>
                                 <AvatarImage
-                                    src={data?.avatar_url || ""}
+                                    src={session.user?.avatar_url || ""}
                                     alt="User Avatar"
                                 />
                                 <AvatarFallback>
-                                    {data?.username}
+                                    {session.user?.username}
                                 </AvatarFallback>
                             </Avatar>
                         </Link>

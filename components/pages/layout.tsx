@@ -19,7 +19,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         if (token) {
             getUser(token)
                 .then((data) => {
-                    setUser(data);
+                    setUser({
+                        user: data,
+                        isLoading: false,
+                    });
                 })
                 .catch((error) => {
                     console.error("Failed to fetch user:", error);

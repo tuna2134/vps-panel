@@ -2,7 +2,7 @@
 import AppSidebar from "@/components/pages/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { user } from "@/lib/jotai";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -14,7 +14,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const router = useRouter();
     const session = useAtomValue(user);
     useEffect(() => {
-        if (!session) {
+        if (session.isLoading) {
+            return;
+        }
+        if (!session.user) {
             router.push("/sign-in");
         }
     }, [session, router]);
