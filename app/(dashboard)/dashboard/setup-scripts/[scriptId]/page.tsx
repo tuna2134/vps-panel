@@ -22,7 +22,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
         scriptId,
         fetchSetupScript,
     );
-    const [userData, _] = useAtom(user);
+    const [session, _] = useAtom(user);
     if (isLoading || !data) {
         return (
             <div className="flex h-full w-full items-center justify-center">
@@ -40,7 +40,7 @@ const Page: NextPage<PageProps> = ({ params }) => {
                     </h2>
                     <p className="mt-4">スクリプト名: {data.title || "不明"}</p>
                 </div>
-                {data.author_id === userData?.id && (
+                {data.author_id === session.user?.id && (
                     <EditAndDelete scriptId={scriptId} />
                 )}
             </div>
