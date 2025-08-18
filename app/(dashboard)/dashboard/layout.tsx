@@ -17,6 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         if (isLoading) {
             return;
         }
+        console.log(userData)
         if (!userData) {
             router.push("/sign-in");
         }
