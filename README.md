@@ -18,3 +18,7 @@ pnpm dev
 ```
 pnpm build
 ```
+
+## ライセンス関係
+本リポジトリーのコードはvercel社の`create-next-app`が生成するテンプレートを用いり、その後改変しています。
+`components/ui`ディレクトリにおいては`@shadcn/ui`が生成するコードを利用しています。
