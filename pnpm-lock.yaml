@@ -107,7 +107,7 @@ importers:
         version: 4.1.12
       '@types/node':
         specifier: ^22.0.0
-        version: 22.17.2
+        version: 22.18.0
       '@types/pg':
         specifier: ^8.15.4
         version: 8.15.5
@@ -1122,8 +1122,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/node@22.17.2':
-    resolution: {integrity: sha512-gL6z5N9Jm9mhY+U2KXZpteb+09zyffliRkZyZOHODGATyC5B1Jt/7TzuuiLkFsSUMLbS1OLmlj/E+/3KF4Q/4w==}
+  '@types/node@22.18.0':
+    resolution: {integrity: sha512-m5ObIqwsUp6BZzyiy4RdZpzWGub9bqLJMvZDD0QMXhxjqMHMENlj+SqF5QxoUwaQNFe+8kz8XM8ZQhqkQPTgMQ==}
 
   '@types/pg@8.15.5':
     resolution: {integrity: sha512-LF7lF6zWEKxuT3/OR8wAZGzkg4ENGXFNyiV/JeOt9z5B+0ZVwbql9McqX5c/WStFq1GaGso7H1AzP/qSzmlCKQ==}
@@ -3617,13 +3617,13 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/node@22.17.2':
+  '@types/node@22.18.0':
     dependencies:
       undici-types: 6.21.0
 
   '@types/pg@8.15.5':
     dependencies:
-      '@types/node': 22.17.2
+      '@types/node': 22.18.0
       pg-protocol: 1.10.3
       pg-types: 2.2.0
 
