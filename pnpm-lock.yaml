@@ -55,7 +55,7 @@ importers:
         version: 6.1.1(next@16.1.6(@babel/core@7.28.4)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       dotenv:
         specifier: ^17.0.0
-        version: 17.2.3
+        version: 17.2.4
       iconoir-react:
         specifier: ^7.11.0
         version: 7.11.0(react@19.2.4)
@@ -1623,8 +1623,8 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
-  dotenv@17.2.3:
-    resolution: {integrity: sha512-JVUnt+DUIzu87TABbhPmNfVdBDt18BLOWjMUFJMSi/Qqg7NTYtabbvSNJGOJ7afbRuv9D/lngizHtP7QyLQ+9w==}
+  dotenv@17.2.4:
+    resolution: {integrity: sha512-mudtfb4zRB4bVvdj0xRo+e6duH1csJRM8IukBqfTRvHotn9+LBXB8ynAidP9zHqoRC/fsllXgk4kCKlR21fIhw==}
     engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
@@ -4287,7 +4287,7 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  dotenv@17.2.3: {}
+  dotenv@17.2.4: {}
 
   dunder-proto@1.0.1:
     dependencies:
